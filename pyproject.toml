@@ -9,7 +9,7 @@ build-backend = "flit.buildapi"
 [project]
 name =  "scematk"
 authors = [
-    {name = "Daniel Ciborowski", email = "dciborow@microsoft.com"},
+    {name = "Hugh Warden", email = "hugh.warden@outlook.com"},
 ]
 description = "Sample Python Project for creating a new Python Module"
 readme = "README.md"
