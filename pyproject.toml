@@ -7,7 +7,7 @@ requires = [
 build-backend = "flit.buildapi"
 
 [project]
-name =  "py-project-toml"
+name =  "scematk"
 authors = [
     {name = "Daniel Ciborowski", email = "dciborow@microsoft.com"},
 ]
