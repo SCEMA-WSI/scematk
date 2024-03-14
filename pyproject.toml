@@ -49,6 +49,7 @@ test = [
     "pytest==8.1.1",
     "pytest-github-actions-annotate-failures",
     "shellcheck-py==0.9.0.6",
+    "scematk",
     "scikit-image"
 ]
 
