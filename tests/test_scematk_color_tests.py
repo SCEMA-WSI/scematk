@@ -1,5 +1,5 @@
 import dask.array as da
-from scematk.color import rgb_to_grey
+from scematk.colour import rgb_to_grey
 from skimage.color import rgb2gray
 
 def test_rgb_to_grey():
