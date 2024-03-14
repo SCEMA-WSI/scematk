@@ -9,7 +9,7 @@ class Preprocessor():
         assert isinstance(process, Process), f"Expected process to be Process, got {type(process)}"
         self.processes.append(process)
 
-    def transform(self, image: Array) -> Array:
+    def process(self, image: Array) -> Array:
         for process in self.processes:
-            image = process.transform(image)
+            image = process.process(image)
         return image

@@ -7,5 +7,5 @@ class Process(ABC):
         self.name = name
 
     @abstractmethod
-    def transform(self, image: Array) -> Array:
+    def process(self, image: Array) -> Array:
         pass
