@@ -1,8 +1,9 @@
 import dask.array as da
 from dask.array import Array
 import matplotlib.pyplot as plt
+import numpy as np
 
-def show_thumb(image: Array, method: str = "median", target_size: int = 256) -> None:
+def show_thumb(image: Array, method: str = "mean", target_size: int = 256) -> None:
     assert isinstance(image, da.Array), f"Invalid image type: {type(image)}"
     assert len(image.shape) == 3 or len(image.shape) == 2, f"Invalid image shape: {image.shape}"
     assert method in ["median", "mean"], f"Invalid method: {method}"
@@ -16,11 +17,15 @@ def show_thumb(image: Array, method: str = "median", target_size: int = 256) -> 
     if coarsen_factor == 0:
         coarsen_factor = 1
     if is_threed:
-        thumb = da.coarsen(method, image, {0: coarsen_factor, 1: coarsen_factor, 2: 1}, trim_excess=True)
-        plt.show(thumb.compute())
+        thumb = da.coarsen(method, image, {0: coarsen_factor, 1: coarsen_factor, 2: 1}, trim_excess=True).compute()
+        if np.max(thumb) > 1:
+            thumb = thumb.astype(np.uint8)
+        plt.imshow(thumb)
     else:
-        thumb = da.coarsen(method, image, {0: coarsen_factor, 1: coarsen_factor}, trim_excess=True)
-        plt.show(thumb.compute(), cmap="gray")
+        thumb = da.coarsen(method, image, {0: coarsen_factor, 1: coarsen_factor}, trim_excess=True).compute()
+        if np.max(thumb) > 1:
+            thumb = thumb.astype(np.uint8)
+        plt.imshow(thumb, cmap="gray")
     plt.axis("off")
     plt.show()
 
