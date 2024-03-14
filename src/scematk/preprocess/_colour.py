@@ -1,9 +1,9 @@
 from ._process import Process
-from ..colour._grey_process import (
+from ..colour._grey_transform import (
     rgb_to_grey,
     rgb_to_gray
 )
-from ..colour._od_process import (
+from ..colour._od_transform import (
     grey_to_od,
     gray_to_od,
     rgb_to_od
