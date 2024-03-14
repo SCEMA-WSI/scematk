@@ -1,5 +1,5 @@
-from .grey_transform import rgb_to_gray, rgb_to_grey
-from .od_transform import grey_to_od, od_to_grey, gray_to_od, od_to_gray, rgb_to_od
+from ._grey_transform import rgb_to_grey, rgb_to_gray
+from ._od_transform import grey_to_od, gray_to_od, od_to_grey, od_to_gray, rgb_to_od
 
 __all__ = [
     "gray_to_od",
