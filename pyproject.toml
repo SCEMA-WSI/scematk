@@ -2,6 +2,7 @@
 requires = [
     "dask",
     "flit",
+    "matplotlib",
     "scikit-image"
 ]
 build-backend = "flit.buildapi"
@@ -40,6 +41,7 @@ test = [
     "flake8-formatter_junit_xml",
     "flake8",
     "flake8-pyproject",
+    "matplotlib",
     "pre-commit==3.6.2",
     "pylint==3.1.0",
     "pylint_junit",

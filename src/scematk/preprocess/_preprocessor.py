@@ -1,4 +1,4 @@
-from . import Process
+from ._process import Process
 from dask.array import Array
 
 class Preprocessor():
