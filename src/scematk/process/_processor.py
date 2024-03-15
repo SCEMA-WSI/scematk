@@ -1,7 +1,7 @@
 from ._process import Process
 from dask.array import Array
 
-class Preprocessor():
+class Processor():
     def __init__(self):
         self.processes = []
 
