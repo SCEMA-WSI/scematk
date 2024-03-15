@@ -10,36 +10,36 @@ from ..colour._od_transform import (
 )
 
 class RGBToGrey(Process):
-    def __init__(self, as_ubyte: bool = False):
-        self.as_ubyte = as_ubyte
+    def __init__(self):
+        pass
 
     def process(self, image):
-        return rgb_to_grey(image, self.as_ubyte)
+        return rgb_to_grey(image)
 
 class RGBToGray(Process):
-    def __init__(self, as_ubyte: bool = False):
-        self.as_ubyte = as_ubyte
+    def __init__(self):
+        pass
 
     def process(self, image):
-        return rgb_to_gray(image, self.as_ubyte)
+        return rgb_to_gray(image)
 
 class GreyToOD(Process):
-    def __init__(self, clip: bool = False):
-        self.clip = clip
+    def __init__(self):
+        pass
 
     def process(self, image):
-        return grey_to_od(image, self.clip)
+        return grey_to_od(image)
 
 class GrayToOD(Process):
-    def __init__(self, clip: bool = False):
-        self.clip = clip
+    def __init__(self):
+        pass
 
     def process(self, image):
-        return gray_to_od(image, self.clip)
+        return gray_to_od(image)
 
 class RGBToOD(Process):
-    def __init__(self, clip: bool = False):
-        self.clip = clip
+    def __init__(self):
+        pass
 
     def process(self, image):
-        return rgb_to_od(image, self.clip)
+        return rgb_to_od(image)
