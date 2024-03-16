@@ -7,7 +7,7 @@ class LabelDilation(Process):
     def __init__(self, distance=1):
         self.distance = distance
 
-    def run(self, label_image: Array) -> Array:
+    def process(self, label_image: Array) -> Array:
         assert isinstance(label_image, Array), f"Expected label_image to be of type Array, got {type(label_image)}"
         assert label_image.ndim == 2, f"Expected label_image to be 2D, got {label_image.ndim}D"
         assert label_image.dtype in (int, 'int32', 'int64'), f"Expected label_image to be of type int, got {label_image.dtype}"
