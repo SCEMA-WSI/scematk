@@ -9,3 +9,7 @@ class Process(ABC):
     @abstractmethod
     def process(self, image: Array) -> Array:
         pass
+
+
+    def __str__(self) -> str:
+        return f"Process: {self.name}"

@@ -4,6 +4,7 @@ from dask_image.ndfilters import gaussian_filter
 
 class GaussianFilter(Process):
     def __init__(self, sigma, order=0, mode='reflect', cval=0.0, truncate=4.0):
+        super().__init__("Apply Gaussian filter")
         self.sigma = sigma
         self.order = order
         self.mode = mode

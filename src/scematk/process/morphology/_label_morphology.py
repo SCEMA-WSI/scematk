@@ -5,6 +5,7 @@ from skimage.segmentation import expand_labels
 
 class LabelDilation(Process):
     def __init__(self, distance=1):
+        super().__init__("Perform label dilation")
         self.distance = distance
 
     def process(self, label_image: Array) -> Array:
