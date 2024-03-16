@@ -5,7 +5,7 @@ from skimage.color import rgb2hsv
 
 class RGBToHSV(Process):
     def __init__(self) -> None:
-        super().__init__("RGB to HSV")
+        super().__init__("Convert an RGB image to an HSV image.")
 
     def process(self, image: Array) -> Array:
         assert isinstance(image, da.Array), f"Expected image to be dask.array.Array, got {type(image)}"

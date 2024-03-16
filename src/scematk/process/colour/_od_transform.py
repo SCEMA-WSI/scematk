@@ -6,7 +6,7 @@ from skimage.color import rgb2gray
 
 class GreyToOD(Process):
     def __init__(self) -> None:
-        super().__init__("Grey to OD")
+        super().__init__("Convert a greyscale image to an optical density image.")
 
     def process(self, image: Array) -> Array:
         assert isinstance(image, da.Array), f"Expected image to be dask.array.Array, got {type(image)}"
@@ -19,7 +19,7 @@ class GreyToOD(Process):
 
 class RGBToOD(Process):
     def __init__(self) -> None:
-        super().__init__("RGB to OD")
+        super().__init__("Convert an RGB image to an optical density image.")
 
     def process(self, image: Array) -> Array:
         assert isinstance(image, da.Array), f"Expected image to be dask.array.Array, got {type(image)}"

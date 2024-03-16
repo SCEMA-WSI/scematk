@@ -6,7 +6,7 @@ from skimage.color import rgb2gray
 
 class RGBToGrey(Process):
     def __init__(self) -> None:
-        super().__init__("RGB to Grey")
+        super().__init__("Convert an RGB image to a greyscale image.")
 
     def process(self, image: Array) -> Array:
         assert isinstance(image, da.Array), f"Expected image to be dask.array.Array, got {type(image)}"
