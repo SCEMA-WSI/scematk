@@ -13,3 +13,8 @@ class Processor():
         for process in self.processes:
             image = process.process(image)
         return image
+
+    def __str__(self) -> str:
+        text = f"Processor with {len(self.processes)} processes:"
+        for i, process in enumerate(self.processes):
+            text += f"\n\t({i+1}) {process.name}"
