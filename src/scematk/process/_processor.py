@@ -18,3 +18,4 @@ class Processor():
         text = f"Processor with {len(self.processes)} processes:"
         for i, process in enumerate(self.processes):
             text += f"\n\t({i+1}) {process.name}"
+        return text
