@@ -3,7 +3,7 @@ import dask.array as da
 from dask.array import Array
 from skimage.color import rgb2lab
 
-class RGBToLab(Process):
+class RGBToLAB(Process):
     def __init__(self) -> None:
         super().__init__("Convert an RGB image to a Lab image.")
 
