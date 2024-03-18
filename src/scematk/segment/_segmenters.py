@@ -29,7 +29,7 @@ class Segmenter(ABC):
         pass
 
 class PrimarySegmenter(Segmenter):
-    def __init__(self, name: str, preprocessor: Processor, postprocessor: Processor) -> None:
+    def __init__(self, name: str, preprocessor: Processor = None, postprocessor: Processor = None) -> None:
         super().__init__(name, preprocessor, postprocessor)
 
     @abstractmethod
@@ -41,7 +41,7 @@ class PrimarySegmenter(Segmenter):
         pass
 
 class SecondarySegmenter(Segmenter):
-    def __init__(self, name: str, preprocessor: Processor, postprocessor: Processor) -> None:
+    def __init__(self, name: str, preprocessor: Processor = None, postprocessor: Processor = None) -> None:
         super().__init__(name, preprocessor, postprocessor)
 
     @abstractmethod
@@ -53,7 +53,7 @@ class SecondarySegmenter(Segmenter):
         pass
 
 class TertiarySegmenter(Segmenter):
-    def __init__(self, name: str, preprocessor: Processor, postprocessor: Processor) -> None:
+    def __init__(self, name: str, preprocessor: Processor = None, postprocessor: Processor = None) -> None:
         super().__init__(name, preprocessor, postprocessor)
 
     @abstractmethod
