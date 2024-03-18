@@ -19,3 +19,6 @@ class Processor():
         for i, process in enumerate(self.processes):
             text += f"\n\t({i+1}) {process.name}"
         return text
+
+    def __repr__(self) -> str:
+        return self.__str__()

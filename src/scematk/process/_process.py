@@ -10,6 +10,8 @@ class Process(ABC):
     def process(self, image: Array) -> Array:
         pass
 
-
     def __str__(self) -> str:
         return f"Process: {self.name}"
+
+    def __repr__(self) -> str:
+        return self.__str__()
