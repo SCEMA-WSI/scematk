@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 from dask.array import Array
 
 class Segmenter(ABC):
-    def __init__self(self, name: str, preprocessor: Processor, postprocessor: Processor) -> None:
+    def __init__(self, name: str, preprocessor: Processor, postprocessor: Processor) -> None:
         assert isinstance(name, str), "Name must be a string"
         assert isinstance(preprocessor, [Processor, None]), "Preprocessor must be a Processor or None"
         assert isinstance(postprocessor, [Processor, None]), "Postprocessor must be a Processor or None"
