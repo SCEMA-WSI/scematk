@@ -12,6 +12,6 @@ class RGBToGrey(Process):
         assert isinstance(image, da.Array), f"Expected image to be dask.array.Array, got {type(image)}"
         assert image.ndim == 3, f"Expected image to be 3D, got {image.ndim}D"
         assert image.dtype == "uint8", f"Expected image to be uint8, got {image.dtype}"
-        image = da.map_blocks(rgb2gray, image, dtype="float64")
+        image = da.map_blocks(rgb2gray, image, drop_axis=2, dtype="float64")
         image = da.map_blocks(img_as_ubyte, image, dtype="uint8")
         return image
