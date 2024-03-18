@@ -5,8 +5,8 @@ from dask.array import Array
 class Segmenter(ABC):
     def __init__(self, name: str, preprocessor: Processor, postprocessor: Processor) -> None:
         assert isinstance(name, str), "Name must be a string"
-        assert isinstance(preprocessor, (Processor, None)), "Preprocessor must be a Processor or None"
-        assert isinstance(postprocessor, (Processor, None)), "Postprocessor must be a Processor or None"
+        assert any(isinstance(preprocessor, type) for type in (Processor, None)), "Preprocessor must be a Processor or None"
+        assert any(isinstance(postprocessor, type) for type in (Processor, None)), "Postprocessor must be a Processor or None"
         self.name = name
         self.fitted = False
         self.preprocessor = preprocessor
