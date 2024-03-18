@@ -4,6 +4,7 @@ from dask.array import Array
 
 class ABContrast2D(Process):
     def __init__(self, a: float = 1, b: float = 0):
+        super().__init__("Apply a linear contrast transformation to a 2D image.")
         assert isinstance(a, float), "a must be a float"
         assert isinstance(b, float), "b must be a float"
         self.a = a
@@ -17,6 +18,7 @@ class ABContrast2D(Process):
 
 class GammaContrast2D(Process):
     def __init__(self, gamma: float = 1):
+        super().__init__("Apply a gamma contrast transformation to a 2D image.")
         assert isinstance(gamma, float), "gamma must be a float"
         self.gamma = gamma
 
