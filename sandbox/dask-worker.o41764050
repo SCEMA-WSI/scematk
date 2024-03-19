@@ -1,0 +1,89 @@
+2024-03-19 08:56:23,875 - distributed.nanny - INFO - Closing Nanny at 'tcp://192.41.105.150:43436'. Reason: failure-to-start-<class 'OSError'>
+2024-03-19 08:56:23,876 - distributed.dask_worker - INFO - End worker
+Traceback (most recent call last):
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/distributed/utils.py", line 1935, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/distributed/comm/tcp.py", line 546, in connect
+    stream = await self.client.connect(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/tornado/tcpclient.py", line 279, in connect
+    af, addr, stream = await connector.start(connect_timeout=timeout)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/distributed/comm/core.py", line 342, in connect
+    comm = await wait_for(
+           ^^^^^^^^^^^^^^^
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/distributed/utils.py", line 1934, in wait_for
+    async with asyncio.timeout(timeout):
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/asyncio/timeouts.py", line 115, in __aexit__
+    raise TimeoutError from exc_val
+TimeoutError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/distributed/core.py", line 664, in start
+    await wait_for(self.start_unsafe(), timeout=timeout)
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/distributed/utils.py", line 1935, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/distributed/nanny.py", line 358, in start_unsafe
+    comm = await self.rpc.connect(saddr)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/distributed/core.py", line 1620, in connect
+    return await self._connect(addr=addr, timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/distributed/core.py", line 1564, in _connect
+    comm = await connect(
+           ^^^^^^^^^^^^^^
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/distributed/comm/core.py", line 368, in connect
+    raise OSError(
+OSError: Timed out trying to connect to tcp://192.41.105.80:35355 after 30 s
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/distributed/cli/dask_worker.py", line 544, in <module>
+    main()  # pragma: no cover
+    ^^^^^^
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/click/core.py", line 1157, in __call__
+    return self.main(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/click/core.py", line 1078, in main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/click/core.py", line 1434, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/click/core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/distributed/cli/dask_worker.py", line 450, in main
+    asyncio_run(run(), loop_factory=get_loop_factory())
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/asyncio/runners.py", line 194, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/asyncio/base_events.py", line 685, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/distributed/cli/dask_worker.py", line 447, in run
+    [task.result() for task in done]
+     ^^^^^^^^^^^^^
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/distributed/cli/dask_worker.py", line 420, in wait_for_nannies_to_finish
+    await asyncio.gather(*nannies)
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/asyncio/tasks.py", line 684, in _wrap_awaitable
+    return await awaitable
+           ^^^^^^^^^^^^^^^
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/distributed/core.py", line 672, in start
+    raise RuntimeError(f"{type(self).__name__} failed to start.") from exc
+RuntimeError: Nanny failed to start.

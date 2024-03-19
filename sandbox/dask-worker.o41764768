@@ -1,0 +1,17 @@
+2024-03-19 09:41:55,613 - distributed.nanny - INFO -         Start Nanny at: 'tcp://192.41.105.88:32995'
+2024-03-19 09:41:56,831 - distributed.worker - INFO -       Start worker at:  tcp://192.41.105.88:46136
+2024-03-19 09:41:56,831 - distributed.worker - INFO -          Listening to:  tcp://192.41.105.88:46136
+2024-03-19 09:41:56,831 - distributed.worker - INFO -           Worker name:             SGECluster-305
+2024-03-19 09:41:56,832 - distributed.worker - INFO -          dashboard at:        192.41.105.88:40459
+2024-03-19 09:41:56,832 - distributed.worker - INFO - Waiting to connect to:  tcp://192.41.105.80:46517
+2024-03-19 09:41:56,832 - distributed.worker - INFO - -------------------------------------------------
+2024-03-19 09:41:56,832 - distributed.worker - INFO -               Threads:                          1
+2024-03-19 09:41:56,832 - distributed.worker - INFO -                Memory:                   7.45 GiB
+2024-03-19 09:41:56,832 - distributed.worker - INFO -       Local Directory: /local/41764768.1.igmm_long/dask-scratch-space/worker-tb7j1bcv
+2024-03-19 09:41:56,832 - distributed.worker - INFO - -------------------------------------------------
+2024-03-19 09:42:05,658 - distributed.worker - INFO - Starting Worker plugin shuffle
+2024-03-19 09:42:05,659 - distributed.worker - INFO -         Registered to:  tcp://192.41.105.80:46517
+2024-03-19 09:42:05,659 - distributed.worker - INFO - -------------------------------------------------
+2024-03-19 09:42:05,659 - distributed.core - INFO - Starting established connection to tcp://192.41.105.80:46517
+/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/dask/core.py:127: RuntimeWarning: divide by zero encountered in log10
+  return func(*(_execute_task(a, cache) for a in args))

@@ -1,0 +1,24 @@
+2024-03-19 09:18:02,169 - distributed.nanny - INFO -         Start Nanny at: 'tcp://192.41.105.161:40506'
+2024-03-19 09:18:03,456 - distributed.worker - INFO -       Start worker at: tcp://192.41.105.161:42547
+2024-03-19 09:18:03,456 - distributed.worker - INFO -          Listening to: tcp://192.41.105.161:42547
+2024-03-19 09:18:03,456 - distributed.worker - INFO -           Worker name:              SGECluster-96
+2024-03-19 09:18:03,458 - distributed.worker - INFO -          dashboard at:       192.41.105.161:34594
+2024-03-19 09:18:03,458 - distributed.worker - INFO - Waiting to connect to:  tcp://192.41.105.80:46517
+2024-03-19 09:18:03,458 - distributed.worker - INFO - -------------------------------------------------
+2024-03-19 09:18:03,458 - distributed.worker - INFO -               Threads:                          1
+2024-03-19 09:18:03,458 - distributed.worker - INFO -                Memory:                   7.45 GiB
+2024-03-19 09:18:03,458 - distributed.worker - INFO -       Local Directory: /local/41764426.1.igmm_long/dask-scratch-space/worker-7hfquu9p
+2024-03-19 09:18:03,458 - distributed.worker - INFO - -------------------------------------------------
+2024-03-19 09:18:03,910 - distributed.worker - INFO - Starting Worker plugin shuffle
+2024-03-19 09:18:03,910 - distributed.worker - INFO -         Registered to:  tcp://192.41.105.80:46517
+2024-03-19 09:18:03,910 - distributed.worker - INFO - -------------------------------------------------
+2024-03-19 09:18:03,911 - distributed.core - INFO - Starting established connection to tcp://192.41.105.80:46517
+/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/dask/core.py:127: RuntimeWarning: divide by zero encountered in log10
+  return func(*(_execute_task(a, cache) for a in args))
+2024-03-19 09:46:27,660 - distributed.worker - INFO - Closing worker gracefully: tcp://192.41.105.161:42547. Reason: worker-lifetime-reached
+2024-03-19 09:46:27,714 - distributed.worker - INFO - Stopping worker at tcp://192.41.105.161:42547. Reason: worker-lifetime-reached
+2024-03-19 09:46:27,717 - distributed.nanny - INFO - Closing Nanny gracefully at 'tcp://192.41.105.161:40506'. Reason: worker-lifetime-reached
+2024-03-19 09:46:27,722 - distributed.core - INFO - Connection to tcp://192.41.105.80:46517 has been closed.
+2024-03-19 09:46:27,724 - distributed.nanny - INFO - Worker closed
+2024-03-19 09:46:30,149 - distributed.nanny - INFO - Closing Nanny at 'tcp://192.41.105.161:40506'. Reason: nanny-close-gracefully
+2024-03-19 09:46:30,150 - distributed.dask_worker - INFO - End worker

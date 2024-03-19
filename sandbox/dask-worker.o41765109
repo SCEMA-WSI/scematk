@@ -1,0 +1,16 @@
+2024-03-19 09:47:08,391 - distributed.nanny - INFO -         Start Nanny at: 'tcp://192.41.104.190:39801'
+2024-03-19 09:47:09,559 - distributed.worker - INFO -       Start worker at: tcp://192.41.104.190:43155
+2024-03-19 09:47:09,559 - distributed.worker - INFO -          Listening to: tcp://192.41.104.190:43155
+2024-03-19 09:47:09,559 - distributed.worker - INFO -           Worker name:              SGECluster-96
+2024-03-19 09:47:09,561 - distributed.worker - INFO -          dashboard at:       192.41.104.190:39399
+2024-03-19 09:47:09,561 - distributed.worker - INFO - Waiting to connect to:  tcp://192.41.105.80:46517
+2024-03-19 09:47:09,561 - distributed.worker - INFO - -------------------------------------------------
+2024-03-19 09:47:09,561 - distributed.worker - INFO -               Threads:                          1
+2024-03-19 09:47:09,561 - distributed.worker - INFO -                Memory:                   7.45 GiB
+2024-03-19 09:47:09,561 - distributed.worker - INFO -       Local Directory: /local/41765109.1.eddie/dask-scratch-space/worker-ey_5b6rl
+2024-03-19 09:47:09,561 - distributed.worker - INFO - -------------------------------------------------
+2024-03-19 09:47:09,999 - distributed.worker - INFO - Starting Worker plugin shuffle
+2024-03-19 09:47:10,000 - distributed.worker - INFO -         Registered to:  tcp://192.41.105.80:46517
+2024-03-19 09:47:10,000 - distributed.worker - INFO - -------------------------------------------------
+2024-03-19 09:47:10,000 - distributed.core - INFO - Starting established connection to tcp://192.41.105.80:46517
+2024-03-19 09:49:42,157 - distributed.core - INFO - Event loop was unresponsive in Worker for 4.02s.  This is often caused by long-running GIL-holding functions or moving large chunks of data. This can cause timeouts and instability.

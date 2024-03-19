@@ -19,18 +19,7 @@ class RulesBasedTissueSegmenter(PrimarySegmenter):
         saturation = da.less_equal(saturation, 0.1)
         value = image[:, :, 2]
         value = da.greater_equal(value, 0.1)
-        blank_mask = da.logical_and(saturation, value)
-        hue = image[:, :, 0]
-        hue1 = da.less(hue, 0.7)
-        hue2 = da.greater(hue, 0.4)
-        hue = da.logical_and(hue1, hue2)
-        saturation = image[:, :, 1]
-        saturation = da.greater(saturation, 0.1)
-        hue_saturation = da.logical_and(hue, saturation)
-        value = image[:, :, 2]
-        value = da.less(value, 0.1)
-        blue_mask = da.logical_or(hue_saturation, value)
-        mask = da.logical_and(blank_mask, blue_mask)
+        mask = da.logical_and(saturation, value)
         mask = da.logical_not(mask)
         mask = self.postprocessor.process(mask)
         return mask

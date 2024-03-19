@@ -1,0 +1,18 @@
+2024-03-19 09:27:16,524 - distributed.nanny - INFO -         Start Nanny at: 'tcp://192.41.104.224:39634'
+2024-03-19 09:27:17,552 - distributed.worker - INFO -       Start worker at: tcp://192.41.104.224:44900
+2024-03-19 09:27:17,553 - distributed.worker - INFO -          Listening to: tcp://192.41.104.224:44900
+2024-03-19 09:27:17,553 - distributed.worker - INFO -           Worker name:             SGECluster-300
+2024-03-19 09:27:17,554 - distributed.worker - INFO -          dashboard at:       192.41.104.224:34064
+2024-03-19 09:27:17,554 - distributed.worker - INFO - Waiting to connect to:  tcp://192.41.105.80:46517
+2024-03-19 09:27:17,554 - distributed.worker - INFO - -------------------------------------------------
+2024-03-19 09:27:17,554 - distributed.worker - INFO -               Threads:                          1
+2024-03-19 09:27:17,554 - distributed.worker - INFO -                Memory:                   7.45 GiB
+2024-03-19 09:27:17,554 - distributed.worker - INFO -       Local Directory: /local/41764577.1.eddie/dask-scratch-space/worker-gwkt_t3t
+2024-03-19 09:27:17,554 - distributed.worker - INFO - -------------------------------------------------
+2024-03-19 09:27:17,961 - distributed.worker - INFO - Starting Worker plugin shuffle
+2024-03-19 09:27:17,962 - distributed.worker - INFO -         Registered to:  tcp://192.41.105.80:46517
+2024-03-19 09:27:17,962 - distributed.worker - INFO - -------------------------------------------------
+2024-03-19 09:27:17,962 - distributed.core - INFO - Starting established connection to tcp://192.41.105.80:46517
+2024-03-19 09:35:22,487 - distributed.core - INFO - Event loop was unresponsive in Worker for 3.32s.  This is often caused by long-running GIL-holding functions or moving large chunks of data. This can cause timeouts and instability.
+/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/dask/core.py:127: RuntimeWarning: divide by zero encountered in log10
+  return func(*(_execute_task(a, cache) for a in args))

@@ -1,0 +1,19 @@
+2024-03-19 08:45:08,712 - distributed.nanny - INFO -         Start Nanny at: 'tcp://192.41.105.176:43845'
+2024-03-19 08:45:09,799 - distributed.worker - INFO -       Start worker at: tcp://192.41.105.176:34510
+2024-03-19 08:45:09,800 - distributed.worker - INFO -          Listening to: tcp://192.41.105.176:34510
+2024-03-19 08:45:09,800 - distributed.worker - INFO -           Worker name:             SGECluster-179
+2024-03-19 08:45:09,801 - distributed.worker - INFO -          dashboard at:       192.41.105.176:36280
+2024-03-19 08:45:09,801 - distributed.worker - INFO - Waiting to connect to:  tcp://192.41.105.80:35355
+2024-03-19 08:45:09,801 - distributed.worker - INFO - -------------------------------------------------
+2024-03-19 08:45:09,801 - distributed.worker - INFO -               Threads:                          1
+2024-03-19 08:45:09,801 - distributed.worker - INFO -                Memory:                   7.45 GiB
+2024-03-19 08:45:09,801 - distributed.worker - INFO -       Local Directory: /local/41763961.1.igmm_long/dask-scratch-space/worker-jfoka9xw
+2024-03-19 08:45:09,801 - distributed.worker - INFO - -------------------------------------------------
+2024-03-19 08:45:10,234 - distributed.worker - INFO - Starting Worker plugin shuffle
+2024-03-19 08:45:10,235 - distributed.worker - INFO -         Registered to:  tcp://192.41.105.80:35355
+2024-03-19 08:45:10,235 - distributed.worker - INFO - -------------------------------------------------
+2024-03-19 08:45:10,236 - distributed.core - INFO - Starting established connection to tcp://192.41.105.80:35355
+2024-03-19 08:55:42,326 - distributed.worker - INFO - Stopping worker at tcp://192.41.105.176:34510. Reason: scheduler-close
+2024-03-19 08:55:42,329 - distributed.nanny - INFO - Closing Nanny gracefully at 'tcp://192.41.105.176:43845'. Reason: scheduler-close
+2024-03-19 08:55:42,332 - distributed.core - INFO - Received 'close-stream' from tcp://192.41.105.80:35355; closing.
+2024-03-19 08:55:42,332 - distributed.nanny - INFO - Worker closed

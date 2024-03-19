@@ -1,0 +1,15 @@
+2024-03-19 09:50:29,346 - distributed.nanny - INFO -         Start Nanny at: 'tcp://192.41.105.61:44194'
+2024-03-19 09:50:30,715 - distributed.worker - INFO -       Start worker at:  tcp://192.41.105.61:39223
+2024-03-19 09:50:30,715 - distributed.worker - INFO -          Listening to:  tcp://192.41.105.61:39223
+2024-03-19 09:50:30,715 - distributed.worker - INFO -           Worker name:             SGECluster-278
+2024-03-19 09:50:30,716 - distributed.worker - INFO -          dashboard at:        192.41.105.61:36587
+2024-03-19 09:50:30,716 - distributed.worker - INFO - Waiting to connect to:  tcp://192.41.105.80:46517
+2024-03-19 09:50:30,716 - distributed.worker - INFO - -------------------------------------------------
+2024-03-19 09:50:30,716 - distributed.worker - INFO -               Threads:                          1
+2024-03-19 09:50:30,717 - distributed.worker - INFO -                Memory:                   7.45 GiB
+2024-03-19 09:50:30,717 - distributed.worker - INFO -       Local Directory: /local/41765206.1.eddie/dask-scratch-space/worker-z2loozui
+2024-03-19 09:50:30,717 - distributed.worker - INFO - -------------------------------------------------
+2024-03-19 09:50:31,243 - distributed.worker - INFO - Starting Worker plugin shuffle
+2024-03-19 09:50:31,244 - distributed.worker - INFO -         Registered to:  tcp://192.41.105.80:46517
+2024-03-19 09:50:31,244 - distributed.worker - INFO - -------------------------------------------------
+2024-03-19 09:50:31,244 - distributed.core - INFO - Starting established connection to tcp://192.41.105.80:46517

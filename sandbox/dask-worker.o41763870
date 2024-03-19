@@ -1,0 +1,19 @@
+2024-03-19 08:41:56,204 - distributed.nanny - INFO -         Start Nanny at: 'tcp://192.41.104.190:34207'
+2024-03-19 08:42:08,307 - distributed.worker - INFO -       Start worker at: tcp://192.41.104.190:40868
+2024-03-19 08:42:08,307 - distributed.worker - INFO -          Listening to: tcp://192.41.104.190:40868
+2024-03-19 08:42:08,308 - distributed.worker - INFO -           Worker name:              SGECluster-87
+2024-03-19 08:42:08,311 - distributed.worker - INFO -          dashboard at:       192.41.104.190:43482
+2024-03-19 08:42:08,311 - distributed.worker - INFO - Waiting to connect to:  tcp://192.41.105.80:35355
+2024-03-19 08:42:08,311 - distributed.worker - INFO - -------------------------------------------------
+2024-03-19 08:42:08,311 - distributed.worker - INFO -               Threads:                          1
+2024-03-19 08:42:08,311 - distributed.worker - INFO -                Memory:                   7.45 GiB
+2024-03-19 08:42:08,311 - distributed.worker - INFO -       Local Directory: /local/41763870.1.eddie/dask-scratch-space/worker-c5hu29l8
+2024-03-19 08:42:08,311 - distributed.worker - INFO - -------------------------------------------------
+2024-03-19 08:42:17,856 - distributed.worker - INFO - Starting Worker plugin shuffle
+2024-03-19 08:42:17,857 - distributed.worker - INFO -         Registered to:  tcp://192.41.105.80:35355
+2024-03-19 08:42:17,858 - distributed.worker - INFO - -------------------------------------------------
+2024-03-19 08:42:17,858 - distributed.core - INFO - Starting established connection to tcp://192.41.105.80:35355
+2024-03-19 08:55:42,322 - distributed.worker - INFO - Stopping worker at tcp://192.41.104.190:40868. Reason: scheduler-close
+2024-03-19 08:55:42,330 - distributed.nanny - INFO - Closing Nanny gracefully at 'tcp://192.41.104.190:34207'. Reason: scheduler-close
+2024-03-19 08:55:42,336 - distributed.core - INFO - Received 'close-stream' from tcp://192.41.105.80:35355; closing.
+2024-03-19 08:55:42,336 - distributed.nanny - INFO - Worker closed

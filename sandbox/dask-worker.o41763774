@@ -1,0 +1,21 @@
+2024-03-19 08:41:46,385 - distributed.nanny - INFO -         Start Nanny at: 'tcp://192.41.105.88:41584'
+2024-03-19 08:41:50,008 - distributed.worker - INFO -       Start worker at:  tcp://192.41.105.88:41472
+2024-03-19 08:41:50,009 - distributed.worker - INFO -          Listening to:  tcp://192.41.105.88:41472
+2024-03-19 08:41:50,009 - distributed.worker - INFO -           Worker name:             SGECluster-168
+2024-03-19 08:41:50,020 - distributed.worker - INFO -          dashboard at:        192.41.105.88:35078
+2024-03-19 08:41:50,020 - distributed.worker - INFO - Waiting to connect to:  tcp://192.41.105.80:35355
+2024-03-19 08:41:50,020 - distributed.worker - INFO - -------------------------------------------------
+2024-03-19 08:41:50,020 - distributed.worker - INFO -               Threads:                          1
+2024-03-19 08:41:50,020 - distributed.worker - INFO -                Memory:                   7.45 GiB
+2024-03-19 08:41:50,020 - distributed.worker - INFO -       Local Directory: /local/41763774.1.igmm_long/dask-scratch-space/worker-lpdyfg0z
+2024-03-19 08:41:50,021 - distributed.worker - INFO - -------------------------------------------------
+2024-03-19 08:41:54,180 - distributed.worker - INFO - Starting Worker plugin shuffle
+2024-03-19 08:41:54,181 - distributed.worker - INFO -         Registered to:  tcp://192.41.105.80:35355
+2024-03-19 08:41:54,181 - distributed.worker - INFO - -------------------------------------------------
+2024-03-19 08:41:54,182 - distributed.core - INFO - Starting established connection to tcp://192.41.105.80:35355
+2024-03-19 08:55:42,328 - distributed.worker - INFO - Stopping worker at tcp://192.41.105.88:41472. Reason: scheduler-close
+2024-03-19 08:55:42,332 - distributed.nanny - INFO - Closing Nanny gracefully at 'tcp://192.41.105.88:41584'. Reason: scheduler-close
+2024-03-19 08:55:42,334 - distributed.core - INFO - Received 'close-stream' from tcp://192.41.105.80:35355; closing.
+2024-03-19 08:55:42,334 - distributed.nanny - INFO - Worker closed
+2024-03-19 08:55:46,098 - distributed.nanny - INFO - Closing Nanny at 'tcp://192.41.105.88:41584'. Reason: nanny-close-gracefully
+2024-03-19 08:55:46,100 - distributed.dask_worker - INFO - End worker

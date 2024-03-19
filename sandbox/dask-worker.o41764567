@@ -1,0 +1,25 @@
+2024-03-19 09:26:37,623 - distributed.nanny - INFO -         Start Nanny at: 'tcp://192.41.105.48:32976'
+2024-03-19 09:26:42,945 - distributed.worker - INFO -       Start worker at:  tcp://192.41.105.48:40080
+2024-03-19 09:26:42,946 - distributed.worker - INFO -          Listening to:  tcp://192.41.105.48:40080
+2024-03-19 09:26:42,946 - distributed.worker - INFO -           Worker name:             SGECluster-101
+2024-03-19 09:26:42,949 - distributed.worker - INFO -          dashboard at:        192.41.105.48:45469
+2024-03-19 09:26:42,949 - distributed.worker - INFO - Waiting to connect to:  tcp://192.41.105.80:46517
+2024-03-19 09:26:42,949 - distributed.worker - INFO - -------------------------------------------------
+2024-03-19 09:26:42,949 - distributed.worker - INFO -               Threads:                          1
+2024-03-19 09:26:42,949 - distributed.worker - INFO -                Memory:                   7.45 GiB
+2024-03-19 09:26:42,949 - distributed.worker - INFO -       Local Directory: /local/41764567.1.eddie/dask-scratch-space/worker-2587bfop
+2024-03-19 09:26:42,949 - distributed.worker - INFO - -------------------------------------------------
+2024-03-19 09:26:48,884 - distributed.worker - INFO - Starting Worker plugin shuffle
+2024-03-19 09:26:48,885 - distributed.worker - INFO -         Registered to:  tcp://192.41.105.80:46517
+2024-03-19 09:26:48,886 - distributed.worker - INFO - -------------------------------------------------
+2024-03-19 09:26:48,887 - distributed.core - INFO - Starting established connection to tcp://192.41.105.80:46517
+2024-03-19 09:35:22,213 - distributed.core - INFO - Event loop was unresponsive in Worker for 3.05s.  This is often caused by long-running GIL-holding functions or moving large chunks of data. This can cause timeouts and instability.
+/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/dask/core.py:127: RuntimeWarning: divide by zero encountered in log10
+  return func(*(_execute_task(a, cache) for a in args))
+2024-03-19 09:50:04,091 - distributed.worker - INFO - Closing worker gracefully: tcp://192.41.105.48:40080. Reason: worker-lifetime-reached
+2024-03-19 09:50:04,147 - distributed.worker - INFO - Stopping worker at tcp://192.41.105.48:40080. Reason: worker-lifetime-reached
+2024-03-19 09:50:04,155 - distributed.nanny - INFO - Closing Nanny gracefully at 'tcp://192.41.105.48:32976'. Reason: worker-lifetime-reached
+2024-03-19 09:50:04,163 - distributed.core - INFO - Connection to tcp://192.41.105.80:46517 has been closed.
+2024-03-19 09:50:04,166 - distributed.nanny - INFO - Worker closed
+2024-03-19 09:50:07,963 - distributed.nanny - INFO - Closing Nanny at 'tcp://192.41.105.48:32976'. Reason: nanny-close-gracefully
+2024-03-19 09:50:07,964 - distributed.dask_worker - INFO - End worker

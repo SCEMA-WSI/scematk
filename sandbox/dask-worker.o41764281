@@ -1,0 +1,68 @@
+2024-03-19 09:18:05,120 - distributed.nanny - INFO -         Start Nanny at: 'tcp://192.41.105.85:43553'
+2024-03-19 09:18:09,840 - distributed.worker - INFO -       Start worker at:  tcp://192.41.105.85:33232
+2024-03-19 09:18:09,840 - distributed.worker - INFO -          Listening to:  tcp://192.41.105.85:33232
+2024-03-19 09:18:09,840 - distributed.worker - INFO -           Worker name:              SGECluster-81
+2024-03-19 09:18:09,842 - distributed.worker - INFO -          dashboard at:        192.41.105.85:45791
+2024-03-19 09:18:09,842 - distributed.worker - INFO - Waiting to connect to:  tcp://192.41.105.80:46517
+2024-03-19 09:18:09,842 - distributed.worker - INFO - -------------------------------------------------
+2024-03-19 09:18:09,842 - distributed.worker - INFO -               Threads:                          1
+2024-03-19 09:18:09,842 - distributed.worker - INFO -                Memory:                   7.45 GiB
+2024-03-19 09:18:09,842 - distributed.worker - INFO -       Local Directory: /local/41764281.1.igmm_long/dask-scratch-space/worker-tpfy7rt6
+2024-03-19 09:18:09,842 - distributed.worker - INFO - -------------------------------------------------
+2024-03-19 09:18:16,085 - distributed.worker - INFO - Starting Worker plugin shuffle
+2024-03-19 09:18:16,086 - distributed.worker - INFO -         Registered to:  tcp://192.41.105.80:46517
+2024-03-19 09:18:16,086 - distributed.worker - INFO - -------------------------------------------------
+2024-03-19 09:18:16,086 - distributed.core - INFO - Starting established connection to tcp://192.41.105.80:46517
+2024-03-19 09:35:22,681 - distributed.core - INFO - Event loop was unresponsive in Worker for 3.52s.  This is often caused by long-running GIL-holding functions or moving large chunks of data. This can cause timeouts and instability.
+/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/dask/core.py:127: RuntimeWarning: divide by zero encountered in log10
+  return func(*(_execute_task(a, cache) for a in args))
+2024-03-19 09:42:58,922 - distributed.worker - ERROR - Worker stream died during communication: tcp://192.41.105.170:41516
+Traceback (most recent call last):
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/distributed/core.py", line 1620, in connect
+    return await self._connect(addr=addr, timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/distributed/core.py", line 1564, in _connect
+    comm = await connect(
+           ^^^^^^^^^^^^^^
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/distributed/comm/core.py", line 342, in connect
+    comm = await wait_for(
+           ^^^^^^^^^^^^^^^
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/distributed/utils.py", line 1935, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/distributed/comm/tcp.py", line 546, in connect
+    stream = await self.client.connect(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/tornado/tcpclient.py", line 279, in connect
+    af, addr, stream = await connector.start(connect_timeout=timeout)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/distributed/core.py", line 1611, in connect
+    async with asyncio.timeout(math.inf) as scope:
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/asyncio/timeouts.py", line 115, in __aexit__
+    raise TimeoutError from exc_val
+TimeoutError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/distributed/worker.py", line 2059, in gather_dep
+    response = await get_data_from_worker(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/distributed/worker.py", line 2860, in get_data_from_worker
+    comm = await rpc.connect(worker)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/distributed/core.py", line 1632, in connect
+    raise CommClosedError(reason)
+distributed.comm.core.CommClosedError: Address removed.
+2024-03-19 09:44:05,310 - distributed.worker - INFO - Closing worker gracefully: tcp://192.41.105.85:33232. Reason: worker-lifetime-reached
+2024-03-19 09:44:05,351 - distributed.worker - INFO - Stopping worker at tcp://192.41.105.85:33232. Reason: worker-lifetime-reached
+2024-03-19 09:44:05,354 - distributed.nanny - INFO - Closing Nanny gracefully at 'tcp://192.41.105.85:43553'. Reason: worker-lifetime-reached
+2024-03-19 09:44:05,363 - distributed.core - INFO - Connection to tcp://192.41.105.80:46517 has been closed.
+2024-03-19 09:44:05,364 - distributed.nanny - INFO - Worker closed
+2024-03-19 09:44:07,797 - distributed.nanny - INFO - Closing Nanny at 'tcp://192.41.105.85:43553'. Reason: nanny-close-gracefully
+2024-03-19 09:44:07,799 - distributed.dask_worker - INFO - End worker

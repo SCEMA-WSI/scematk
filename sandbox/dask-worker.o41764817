@@ -1,0 +1,58 @@
+2024-03-19 09:43:08,639 - distributed.nanny - INFO -         Start Nanny at: 'tcp://192.41.105.159:37322'
+2024-03-19 09:43:11,874 - distributed.worker - INFO -       Start worker at: tcp://192.41.105.159:44553
+2024-03-19 09:43:11,874 - distributed.worker - INFO -          Listening to: tcp://192.41.105.159:44553
+2024-03-19 09:43:11,875 - distributed.worker - INFO -           Worker name:             SGECluster-151
+2024-03-19 09:43:11,875 - distributed.worker - INFO -          dashboard at:       192.41.105.159:33656
+2024-03-19 09:43:11,875 - distributed.worker - INFO - Waiting to connect to:  tcp://192.41.105.80:46517
+2024-03-19 09:43:11,875 - distributed.worker - INFO - -------------------------------------------------
+2024-03-19 09:43:11,876 - distributed.worker - INFO -               Threads:                          1
+2024-03-19 09:43:11,876 - distributed.worker - INFO -                Memory:                   7.45 GiB
+2024-03-19 09:43:11,876 - distributed.worker - INFO -       Local Directory: /local/41764817.1.igmm_long/dask-scratch-space/worker-0cgttts6
+2024-03-19 09:43:11,876 - distributed.worker - INFO - -------------------------------------------------
+2024-03-19 09:43:15,485 - distributed.worker - INFO - Starting Worker plugin shuffle
+2024-03-19 09:43:15,486 - distributed.worker - INFO -         Registered to:  tcp://192.41.105.80:46517
+2024-03-19 09:43:15,486 - distributed.worker - INFO - -------------------------------------------------
+2024-03-19 09:43:15,487 - distributed.core - INFO - Starting established connection to tcp://192.41.105.80:46517
+2024-03-19 09:43:17,136 - distributed.worker - ERROR - Worker stream died during communication: tcp://192.41.105.171:36097
+Traceback (most recent call last):
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/distributed/core.py", line 1620, in connect
+    return await self._connect(addr=addr, timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/distributed/core.py", line 1564, in _connect
+    comm = await connect(
+           ^^^^^^^^^^^^^^
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/distributed/comm/core.py", line 342, in connect
+    comm = await wait_for(
+           ^^^^^^^^^^^^^^^
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/distributed/utils.py", line 1935, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/distributed/comm/tcp.py", line 546, in connect
+    stream = await self.client.connect(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/tornado/tcpclient.py", line 279, in connect
+    af, addr, stream = await connector.start(connect_timeout=timeout)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/distributed/core.py", line 1611, in connect
+    async with asyncio.timeout(math.inf) as scope:
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/asyncio/timeouts.py", line 115, in __aexit__
+    raise TimeoutError from exc_val
+TimeoutError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/distributed/worker.py", line 2059, in gather_dep
+    response = await get_data_from_worker(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/distributed/worker.py", line 2860, in get_data_from_worker
+    comm = await rpc.connect(worker)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/s2211259/khamseh-lab/scematk/env/lib/python3.12/site-packages/distributed/core.py", line 1632, in connect
+    raise CommClosedError(reason)
+distributed.comm.core.CommClosedError: Address removed.
