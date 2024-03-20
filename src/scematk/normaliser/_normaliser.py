@@ -2,7 +2,7 @@ from ..process._processor import Processor
 from abc import ABC, abstractmethod
 from dask.array import Array
 
-class QCStep(ABC):
+class Normaliser(ABC):
     def __init__(self, name, preprocessor: Processor = None, postprocessor: Processor = None) -> None:
         self.name = name
         preprocessor = preprocessor or self._default_preprocessor()
