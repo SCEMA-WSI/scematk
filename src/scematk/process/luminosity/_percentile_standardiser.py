@@ -14,7 +14,8 @@ class LuminosityPercentileStandardiser(Process):
     def process(self, image: Array) -> Array:
         image = da.map_blocks(rgb2lab, image, dtype=float)
         luminosity = image[:, :, 0]
-        luminosity = da.percentile(luminosity.ravel(), self.percentile)
+        percentile = self.percentile
+        luminosity = da.percentile(luminosity.ravel(), percentile)
         image[:, :, 0] = da.clip(image[:, :, 0], 0, luminosity)
         image = da.map_blocks(lab2rgb, image, dtype=float)
         image = da.map_blocks(img_as_ubyte, image, dtype="uint8")

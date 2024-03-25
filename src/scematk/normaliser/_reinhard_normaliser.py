@@ -15,8 +15,8 @@ class ReinhardNormaliser(Normaliser):
         assert image.shape[2] == 3, "Image must have 3 channels"
         image = self.preprocessor.process(image)
         image = da.map_blocks(rgb2lab, image, dtype="float32")
-        self.means = da.mean(image, axis=(0, 1))
-        self.stds = da.std(image, axis=(0, 1))
+        self.means = da.mean(image, axis=(0, 1)).compute()
+        self.stds = da.std(image, axis=(0, 1)).compute()
         self.fitted = True
 
     def run(self, image: Array) -> Array:
