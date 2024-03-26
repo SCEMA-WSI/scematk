@@ -6,6 +6,8 @@ class WSI():
         assert img.ndim == 3, 'img must be a 3D array'
         assert isinstance(info, dict), 'info must be a dictionary'
         self.img = img
+        self.shape = img.shape
+        self.ndim = img.ndim
         self.info = info
         self._set_mpp()
 
