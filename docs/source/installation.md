@@ -1,23 +1,23 @@
 Installation
 ============
 
-**my-package** supports Python >= 3.8.
+**scematk** supports Python >= 3.8.
 
 ## Installing with `pip`
 
-**my-package** is available [on PyPI](https://pypi.org/project/my-package/). Just run
+**scematk** is available [on PyPI](https://pypi.org/project/scematk/). Just run
 
 ```bash
-pip install my-package
+pip install scematk
 ```
 
 ## Installing from source
 
-To install **my-package** from source, first clone [the repository](https://github.com/allenai/python-package-template):
+To install **scematk** from source, first clone [the repository](https://github.com/SCEMA-WSI/scematk):
 
 ```bash
-git clone https://github.com/allenai/python-package-template.git
-cd python-package-template
+git clone https://github.com/SCEMA-WSI/scematk.git
+cd scematk
 ```
 
 Then run
