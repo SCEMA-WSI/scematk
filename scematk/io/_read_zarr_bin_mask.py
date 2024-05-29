@@ -4,6 +4,16 @@ import json
 import os
 
 def read_zarr_bin_mask(zarr_path: str, meta_path: str, mask_name: str = None) -> BinaryMask:
+    """Read a Zarr array and JSON metadata file into a BinaryMask.
+
+    Args:
+        zarr_path (str): Path to the Zarr array.
+        meta_path (str): Path to the JSON metadata file.
+        mask_name (str, optional): Name of the mask. Defaults to None.
+
+    Returns:
+        BinaryMask: _description_
+    """
     assert isinstance(zarr_path, str)
     assert zarr_path.endswith('.zarr')
     assert os.path.exists(zarr_path)
