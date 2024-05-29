@@ -2,7 +2,6 @@ from ._mask import Mask
 import dask.array as da
 from dask.array import Array
 from numpy import ndarray
-from stardist import random_label_cmap
 from typing import List
 
 class LabelMask(Mask):
