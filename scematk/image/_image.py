@@ -113,7 +113,7 @@ class Image(ABC):
             raise ValueError("Microns per pixel (mpp) not available")
         return micron / self.mpp
     
-    def read_region(self, y_min: int, x_min: int, y_len: int, x_len: int, pad: bool = True, channel: str = None) -> ndarray:
+    def read_region(self, y_min: int, x_min: int, y_len: int, x_len: int, pad: bool = True, channel: str | None = None) -> ndarray:
         """Read a region of the WSI image
 
         Args:
@@ -166,7 +166,7 @@ class Image(ABC):
             region = region[..., channel_index]
         return region
     
-    def show_region(self, y_min: int, x_min: int, y_len: int, x_len:int, pad: bool = True, channel: str = None, scalebar: bool = True, scalebar_location: str = "lower right") -> None:
+    def show_region(self, y_min: int, x_min: int, y_len: int, x_len:int, pad: bool = True, channel: str | None = None, scalebar: bool = True, scalebar_location: str = "lower right") -> None:
         """Display a region of the WSI image
 
         Args:
@@ -222,7 +222,7 @@ class Image(ABC):
         """
         pass
     
-    def show_thumb(self, target_size: int = 512, scalebar: bool = True, scalebar_location: str = "lower right", grid_lines: str = None) -> None:
+    def show_thumb(self, target_size: int = 512, scalebar: bool = True, scalebar_location: str = "lower right", grid_lines: str | None = None) -> None:
         """Display a thumbnail of the WSI image
 
         Args:
