@@ -3,7 +3,7 @@ import dask.array as da
 import json
 import os
 
-def read_zarr_lbl_mask(zarr_path: str, meta_path: str, mask_name: str = None) -> LabelMask:
+def read_zarr_lbl_mask(zarr_path: str, meta_path: str, mask_name: str | None = None) -> LabelMask:
     """Read a Zarr array and JSON metadata file into a LabelMask.
 
     Args:
@@ -22,7 +22,7 @@ def read_zarr_lbl_mask(zarr_path: str, meta_path: str, mask_name: str = None) ->
     assert os.path.exists(meta_path)
     assert isinstance(mask_name, (str, type(None)))
     if not mask_name:
-        mask_name = 'Mask'
+        mask_name = ['Mask']
     mask = da.from_zarr(zarr_path)
     with open(meta_path, 'r') as f:
         meta = json.load(f)

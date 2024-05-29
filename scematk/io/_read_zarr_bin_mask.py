@@ -3,7 +3,7 @@ import dask.array as da
 import json
 import os
 
-def read_zarr_bin_mask(zarr_path: str, meta_path: str, mask_name: str = None) -> BinaryMask:
+def read_zarr_bin_mask(zarr_path: str, meta_path: str, mask_name: str | None = None) -> BinaryMask:
     """Read a Zarr array and JSON metadata file into a BinaryMask.
 
     Args:
@@ -21,7 +21,7 @@ def read_zarr_bin_mask(zarr_path: str, meta_path: str, mask_name: str = None) ->
     assert meta_path.endswith('.json')
     assert os.path.exists(meta_path)
     if mask_name is None:
-        mask_name = 'Mask'
+        mask_name = ['Mask']
     mask = da.from_zarr(zarr_path)
     with open(meta_path, 'r') as f:
         meta = json.load(f)
