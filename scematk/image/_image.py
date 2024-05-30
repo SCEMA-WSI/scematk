@@ -184,7 +184,7 @@ class Image(ABC):
         """
         assert isinstance(scalebar, bool), "scalebar must be a boolean"
         assert isinstance(scalebar_location, str), "scalebar_location must be a string"
-        if not "mpp" in self.info:
+        if "mpp" not in self.info:
             scalebar = False
         region = self.read_region(y_min, x_min, y_len, x_len, pad, channel)
         channel_names = self.channel_names
