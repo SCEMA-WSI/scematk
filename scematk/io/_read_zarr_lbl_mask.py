@@ -3,13 +3,13 @@ import dask.array as da
 import json
 import os
 
-def read_zarr_lbl_mask(zarr_path: str, meta_path: str, mask_name: str | None = None) -> LabelMask:
+def read_zarr_lbl_mask(zarr_path: str, meta_path: str, mask_name: list[str] | str | None = None) -> LabelMask:
     """Read a Zarr array and JSON metadata file into a LabelMask.
 
     Args:
         zarr_path (str): Path to the Zarr array.
         meta_path (str): Path to the JSON metadata file.
-        mask_name (str, optional): Name of the mask. Defaults to None.
+        mask_name (List[str], str, optional): Name of the mask. Defaults to None.
 
     Returns:
         LabelMask: LabelMask object.
