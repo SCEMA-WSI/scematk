@@ -21,8 +21,11 @@ def read_zarr_bin_mask(zarr_path: str, meta_path: str, mask_name: List[str] | st
     assert isinstance(meta_path, str)
     assert meta_path.endswith('.json')
     assert os.path.exists(meta_path)
+    assert isinstance(mask_name, (list, str)) or mask_name is None
     if mask_name is None:
         mask_name = ['Mask']
+    if not isinstance(mask_name, list):
+        mask_name = [mask_name]
     mask = da.from_zarr(zarr_path)
     with open(meta_path, 'r') as f:
         meta = json.load(f)
