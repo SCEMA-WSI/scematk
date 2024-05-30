@@ -1,10 +1,11 @@
-from ._image import Image
 from typing import List
 
 import dask.array as da
 import numpy as np
 from dask.array import Array
 from numpy import ndarray
+
+from ._image import Image
 
 
 class UByteImage(Image):
