@@ -2,14 +2,15 @@ from ..image._binary_mask import BinaryMask
 import dask.array as da
 import json
 import os
+from typing import List
 
-def read_zarr_bin_mask(zarr_path: str, meta_path: str, mask_name: str | None = None) -> BinaryMask:
+def read_zarr_bin_mask(zarr_path: str, meta_path: str, mask_name: List[str] | str | None = None) -> BinaryMask:
     """Read a Zarr array and JSON metadata file into a BinaryMask.
 
     Args:
         zarr_path (str): Path to the Zarr array.
         meta_path (str): Path to the JSON metadata file.
-        mask_name (str, optional): Name of the mask. Defaults to None.
+        mask_name (List[str], str, optional): Name of the mask. Defaults to None. 
 
     Returns:
         BinaryMask: _description_
@@ -25,4 +26,4 @@ def read_zarr_bin_mask(zarr_path: str, meta_path: str, mask_name: str | None = N
     mask = da.from_zarr(zarr_path)
     with open(meta_path, 'r') as f:
         meta = json.load(f)
-    return BinaryMask(mask, meta, channel_names='Mask')
+    return BinaryMask(mask, meta, channel_names=mask_name)
