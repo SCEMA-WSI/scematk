@@ -42,8 +42,8 @@ def tiff_to_zarr(tiff_path: str, zarr_path: str, meta_path: str, tile_size: int 
             'format': str(slide.detect_format(tiff_path)),
         }
         if hasattr(slide, 'properties') and 'openslide.mpp-x' in slide.properties and 'openslide.mpp-y' in slide.properties:
-            slide_metadata['mpp-x'] = float(slide.properties['openslide.mpp-x'])
-            slide_metadata['mpp-y'] = float(slide.properties['openslide.mpp-y'])
+            slide_metadata['mpp-x'] = str(float(slide.properties['openslide.mpp-x']))
+            slide_metadata['mpp-y'] = str(float(slide.properties['openslide.mpp-y']))
             if slide_metadata['mpp-x'] == slide_metadata['mpp-y']:
                 slide_metadata['mpp'] = slide_metadata['mpp-x']
         with open(meta_path, 'w') as f:
