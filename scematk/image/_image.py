@@ -25,22 +25,28 @@ class Image(ABC):
         assert isinstance(info, dict), "info must be a dictionary"
         if not isinstance(channel_names, list):
             channel_names = [channel_names]
-        assert all(isinstance(name, str) for name in channel_names), "All channel names must be strings"
+        assert all(
+            isinstance(name, str) for name in channel_names
+        ), "All channel names must be strings"
         if image.ndim == 3:
-            assert len(channel_names) == image.shape[2], "number of channel names must match number of channels in image"
+            assert (
+                len(channel_names) == image.shape[2]
+            ), "number of channel names must match number of channels in image"
         else:
-            assert len(channel_names) == 1, "number of channel names must match number of channels in image"
+            assert (
+                len(channel_names) == 1
+            ), "number of channel names must match number of channels in image"
         self.image = image
         self.info = info
         self.ndim = image.ndim
         self.shape = image.shape
         self.dtype = str(image.dtype)
-        self.name = info.get('name', None)
-        if 'mpp' in self.info:
-            self.mpp = self.info['mpp']
-        elif 'mpp-x' in self.info and 'mpp-y' in self.info:
-            if self.info['mpp-x'] == self.info['mpp-y']:
-                self.mpp = self.info['mpp-x']
+        self.name = info.get("name", None)
+        if "mpp" in self.info:
+            self.mpp = self.info["mpp"]
+        elif "mpp-x" in self.info and "mpp-y" in self.info:
+            if self.info["mpp-x"] == self.info["mpp-y"]:
+                self.mpp = self.info["mpp-x"]
             else:
                 self.mpp = None
         else:
@@ -69,7 +75,7 @@ class Image(ABC):
         assert isinstance(path, str), "path must be a string"
         assert isinstance(overwrite, bool), "overwrite must be a boolean"
         assert overwrite or not os.path.exists(path), "info file already exists"
-        with open(path, 'w') as f:
+        with open(path, "w") as f:
             json.dump(self.info, f)
 
     def save(self, image_path: str, info_path: str, overwrite: bool = False) -> None:
@@ -82,7 +88,7 @@ class Image(ABC):
         """
         self.save_image(image_path, overwrite)
         self.save_info(info_path, overwrite)
-    
+
     def rechunk(self, chunks: tuple) -> None:
         """Rechunk the WSI image
 
@@ -90,13 +96,17 @@ class Image(ABC):
             chunks (tuple): The new chunk shape
         """
         assert isinstance(chunks, tuple), "chunks must be a tuple"
-        assert all(isinstance(chunk, int) for chunk in chunks), "all elements of chunks must be integers"
+        assert all(
+            isinstance(chunk, int) for chunk in chunks
+        ), "all elements of chunks must be integers"
         assert len(chunks) == self.ndim, "length of chunks must match number of dimensions in image"
         assert all(chunk > 0 for chunk in chunks), "all elements of chunks must be positive"
         if self.ndim == 3:
-            assert chunks[2] == len(self.channel_names), "third element of chunks must match number of channels in image"
+            assert chunks[2] == len(
+                self.channel_names
+            ), "third element of chunks must match number of channels in image"
         self.image = self.image.rechunk(chunks)
-    
+
     def pixel_from_micron(self, micron: float) -> float:
         """Convert microns to pixels according to the microns per pixel (mpp) of the image
 
@@ -114,8 +124,16 @@ class Image(ABC):
         if not self.mpp or not isinstance(self.mpp, (int, float)):
             raise ValueError("Microns per pixel (mpp) not available")
         return micron / self.mpp
-    
-    def read_region(self, y_min: int, x_min: int, y_len: int, x_len: int, pad: bool = True, channel: str | None = None) -> ndarray:
+
+    def read_region(
+        self,
+        y_min: int,
+        x_min: int,
+        y_len: int,
+        x_len: int,
+        pad: bool = True,
+        channel: str | None = None,
+    ) -> ndarray:
         """Read a region of the WSI image
 
         Args:
@@ -142,9 +160,15 @@ class Image(ABC):
         assert x_min >= 0 or pad, "x_min must be non-negative if no padding is being applied"
         assert y_len > 0, "y_len must be positive"
         assert x_len > 0, "x_len must be positive"
-        assert y_min + y_len <= self.shape[0] or pad, "y_min + y_len must be less than or equal to the height of the image if no padding is being applied"
-        assert x_min + x_len <= self.shape[1] or pad, "x_min + x_len must be less than or equal to the width of the image if no padding is being applied"
-        assert channel is None or channel in self.channel_names, "channel must be one of the channel names"
+        assert (
+            y_min + y_len <= self.shape[0] or pad
+        ), "y_min + y_len must be less than or equal to the height of the image if no padding is being applied"
+        assert (
+            x_min + x_len <= self.shape[1] or pad
+        ), "x_min + x_len must be less than or equal to the width of the image if no padding is being applied"
+        assert (
+            channel is None or channel in self.channel_names
+        ), "channel must be one of the channel names"
         y_pad = [0, 0]
         x_pad = [0, 0]
         y_pad[0] = max(0, -y_min) if y_min < 0 else 0
@@ -158,17 +182,37 @@ class Image(ABC):
         region = self.image[y_min:y_max, x_min:x_max].compute()
         if pad:
             if self.ndim == 2:
-                region = np.pad(region, ((y_pad[0], y_pad[1]), (x_pad[0], x_pad[1])), mode='constant', constant_values=0)
+                region = np.pad(
+                    region,
+                    ((y_pad[0], y_pad[1]), (x_pad[0], x_pad[1])),
+                    mode="constant",
+                    constant_values=0,
+                )
             else:
-                region = np.pad(region, ((y_pad[0], y_pad[1]), (x_pad[0], x_pad[1]), (0, 0)), mode='constant', constant_values=0)
+                region = np.pad(
+                    region,
+                    ((y_pad[0], y_pad[1]), (x_pad[0], x_pad[1]), (0, 0)),
+                    mode="constant",
+                    constant_values=0,
+                )
         if channel:
             if self.ndim == 2:
                 raise ValueError("Cannot specify channel for single channel image")
             channel_index = self.channel_names.index(channel)
             region = region[..., channel_index]
         return region
-    
-    def show_region(self, y_min: int, x_min: int, y_len: int, x_len:int, pad: bool = True, channel: str | None = None, scalebar: bool = True, scalebar_location: str = "lower right") -> None:
+
+    def show_region(
+        self,
+        y_min: int,
+        x_min: int,
+        y_len: int,
+        x_len: int,
+        pad: bool = True,
+        channel: str | None = None,
+        scalebar: bool = True,
+        scalebar_location: str = "lower right",
+    ) -> None:
         """Display a region of the WSI image
 
         Args:
@@ -192,26 +236,32 @@ class Image(ABC):
         channel_names = self.channel_names
         if len(channel_names) == 1 or channel:
             region = np.squeeze(region)
-            cmap = 'gray'
+            cmap = "gray"
         elif len(channel_names) == 2 and not channel:
-            region = np.pad(region, ((0, 0), (0, 0), (1, 0)), mode='constant', constant_values=0)
+            region = np.pad(region, ((0, 0), (0, 0), (1, 0)), mode="constant", constant_values=0)
             cmap = None
         elif len(channel_names) == 3 and not channel:
             cmap = None
         else:
             raise NotImplementedError("Only 1, 2, or 3 channels supported")
         if self.ndim == 2:
-            if self.dtype == 'bool':
-                cmap = 'gray'
-            elif self.dtype in ['int', 'int32', 'int64']:
+            if self.dtype == "bool":
+                cmap = "gray"
+            elif self.dtype in ["int", "int32", "int64"]:
                 cmap = "jet"
         plt.imshow(region, cmap=cmap)
         if scalebar:
-            scalebar = ScaleBar(self.mpp, units='µm', location=scalebar_location, length_fraction=0.1, border_pad=0.5)
+            scalebar = ScaleBar(
+                self.mpp,
+                units="µm",
+                location=scalebar_location,
+                length_fraction=0.1,
+                border_pad=0.5,
+            )
             plt.gca().add_artist(scalebar)
-        plt.axis('off')
+        plt.axis("off")
         plt.show()
-    
+
     @abstractmethod
     def get_thumb(self, target_size: int = 512) -> ndarray:
         """Get a thumbnail of the WSI image
@@ -223,8 +273,14 @@ class Image(ABC):
             ndarray: The thumbnail image as a numpy array
         """
         pass
-    
-    def show_thumb(self, target_size: int = 512, scalebar: bool = True, scalebar_location: str = "lower right", grid_lines: str | None = None) -> None:
+
+    def show_thumb(
+        self,
+        target_size: int = 512,
+        scalebar: bool = True,
+        scalebar_location: str = "lower right",
+        grid_lines: str | None = None,
+    ) -> None:
         """Display a thumbnail of the WSI image
 
         Args:
@@ -237,13 +293,18 @@ class Image(ABC):
         assert target_size > 0, "target_size must be positive"
         assert isinstance(scalebar, bool), "scalebar must be a boolean"
         assert isinstance(scalebar_location, str), "scalebar_location must be a string"
-        assert scalebar_location in ["lower right", "lower left", "upper right", "upper left"], "scalebar_location must be one of 'lower right', 'lower left', 'upper right', or 'upper left'"
+        assert scalebar_location in [
+            "lower right",
+            "lower left",
+            "upper right",
+            "upper left",
+        ], "scalebar_location must be one of 'lower right', 'lower left', 'upper right', or 'upper left'"
         assert isinstance(grid_lines, (str, type(None))), "grid_lines must be a string or None"
         if not self.mpp:
             scalebar = False
         thumb = self.get_thumb(target_size)
         if len(thumb.shape) == 2:
-            cmap = 'gray'
+            cmap = "gray"
         else:
             cmap = None
         plt.imshow(thumb, cmap=cmap)
@@ -254,18 +315,24 @@ class Image(ABC):
             spacing = 10000 // coarsen_factor
             y_spacing = range(spacing, thumb.shape[0], spacing)
             x_spacing = range(spacing, thumb.shape[1], spacing)
-            grid_line_col = grid_lines if isinstance(grid_lines, str) else 'red'
+            grid_line_col = grid_lines if isinstance(grid_lines, str) else "red"
             for y in y_spacing:
-                plt.axhline(y, color=grid_line_col, linestyle='--')
+                plt.axhline(y, color=grid_line_col, linestyle="--")
             for x in x_spacing:
-                plt.axvline(x, color=grid_line_col, linestyle='--')
+                plt.axvline(x, color=grid_line_col, linestyle="--")
         if scalebar:
             coarsen_factor = max([s // target_size for s in self.shape])
             if coarsen_factor == 0:
                 coarsen_factor = 1
-            scalebar = ScaleBar(self.mpp * coarsen_factor, units='µm', location=scalebar_location, length_fraction=0.1, border_pad=0.5)
+            scalebar = ScaleBar(
+                self.mpp * coarsen_factor,
+                units="µm",
+                location=scalebar_location,
+                length_fraction=0.1,
+                border_pad=0.5,
+            )
             plt.gca().add_artist(scalebar)
-        plt.axis('off')
+        plt.axis("off")
         plt.show()
 
     def _repr_html_(self) -> str:
@@ -280,7 +347,7 @@ class Image(ABC):
             "Blue": "#0000FF",
             "Hematoxylin": "#2A2670",
             "Eosin": "#E63DB7",
-            "DAB": "#813723"
+            "DAB": "#813723",
         }
         channel_names = []
         for colour in self.channel_names:
@@ -289,7 +356,7 @@ class Image(ABC):
             else:
                 channel_names.append(colour)
         total_width = 400
-        html = f'''
+        html = f"""
         <div style="width: {total_width}px; background-color: #202020; padding: 20px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
             <h1>SCEMATK Image Object</h1>
             <p>Name: {self.name if self.name else "SCEMATK Image"}</p>
@@ -299,5 +366,5 @@ class Image(ABC):
             <p>Chunks: {" x ".join([f"{i:,}" for i in self.image.chunksize[:2]])}
             <p>Data Type: {self.dtype}</p>
         </div>
-        '''
+        """
         return html

@@ -17,7 +17,7 @@ class LabelMask(Mask):
             channel_names (List[str]): The names of the channels in the mask
         """
         super().__init__(image, info, channel_names)
-        assert image.dtype in [int, 'int32', 'int64'], "image must be an integer array"
+        assert image.dtype in [int, "int32", "int64"], "image must be an integer array"
 
     def get_thumb(self, target_size: int = 512) -> ndarray:
         """Get a thumbnail of the mask
@@ -34,6 +34,6 @@ class LabelMask(Mask):
         if coarsen_factor == 0:
             coarsen_factor = 1
         image = self.image
-        image = image.astype('float32')
+        image = image.astype("float32")
         thumb = da.coarsen(da.mean, image, {0: coarsen_factor, 1: coarsen_factor}, trim_excess=True)
         return thumb.compute()

@@ -34,6 +34,6 @@ class BinaryMask(Mask):
         if coarsen_factor == 0:
             coarsen_factor = 1
         image = self.image
-        image = image.astype('float32')
+        image = image.astype("float32")
         thumb = da.coarsen(da.mean, image, {0: coarsen_factor, 1: coarsen_factor}, trim_excess=True)
         return thumb.compute()

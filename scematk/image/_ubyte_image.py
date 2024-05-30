@@ -1,4 +1,4 @@
-from._image import Image
+from ._image import Image
 from typing import List
 
 import dask.array as da
@@ -17,7 +17,7 @@ class UByteImage(Image):
             channel_names (List[str]): The names of the channels in the image
         """
         super().__init__(image, info, channel_names)
-        assert self.dtype == 'uint8', "image must be of type uint8"
+        assert self.dtype == "uint8", "image must be of type uint8"
         if self.ndim == 2:
             self.image = da.expand_dims(self.image, axis=-1)
         self.ndim = self.image.ndim
@@ -42,12 +42,14 @@ class UByteImage(Image):
         if coarsen_factor == 0:
             coarsen_factor = 1
         image = self.image
-        thumb = da.coarsen(da.mean, image, {0: coarsen_factor, 1: coarsen_factor, 2:1}, trim_excess=True)
-        thumb = thumb.astype('uint8').compute()
+        thumb = da.coarsen(
+            da.mean, image, {0: coarsen_factor, 1: coarsen_factor, 2: 1}, trim_excess=True
+        )
+        thumb = thumb.astype("uint8").compute()
         if self.shape[2] == 1:
             thumb = thumb.squeeze()
         elif self.shape[2] == 2:
-            thumb = np.pad(thumb, ((0, 0), (0, 0), (1, 0)), mode='constant', constant_values=0)
+            thumb = np.pad(thumb, ((0, 0), (0, 0), (1, 0)), mode="constant", constant_values=0)
         elif self.shape[2] == 3:
             pass
         else:

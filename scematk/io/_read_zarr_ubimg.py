@@ -7,7 +7,9 @@ import dask.array as da
 from ..image._ubyte_image import UByteImage
 
 
-def read_zarr_ubimg(zarr_path: str, meta_path: str, channel_names: List[str] | None = None) -> UByteImage:
+def read_zarr_ubimg(
+    zarr_path: str, meta_path: str, channel_names: List[str] | None = None
+) -> UByteImage:
     """Read a Zarr array and JSON metadata file into a UByteImage.
 
     Args:
@@ -22,16 +24,16 @@ def read_zarr_ubimg(zarr_path: str, meta_path: str, channel_names: List[str] | N
         UByteImage: UByteImage object.
     """
     assert isinstance(zarr_path, str)
-    assert zarr_path.endswith('.zarr')
+    assert zarr_path.endswith(".zarr")
     assert os.path.exists(zarr_path)
     assert isinstance(meta_path, str)
-    assert meta_path.endswith('.json')
+    assert meta_path.endswith(".json")
     assert os.path.exists(meta_path)
     img = da.from_zarr(zarr_path)
-    with open(meta_path, 'r') as f:
+    with open(meta_path, "r") as f:
         meta = json.load(f)
     if channel_names is None:
-        channel_names = ['Red', 'Green', 'Blue']
+        channel_names = ["Red", "Green", "Blue"]
     if str(img.dtype) == "uint8":
         return UByteImage(img, meta, channel_names)
     else:
