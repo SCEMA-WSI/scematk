@@ -1,9 +1,11 @@
-from itertools import product
 import json
 import os
+from itertools import product
+
+import zarr
 from openslide import OpenSlide
 from tqdm import tqdm
-import zarr
+
 
 def tiff_to_zarr(tiff_path: str, zarr_path: str, meta_path: str, tile_size: int = 4096, chunk_size: int = 4096) -> None:
     """Convert a TIFF image to a Zarr array and JSON metadata file.

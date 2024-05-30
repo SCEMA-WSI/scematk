@@ -1,13 +1,15 @@
-from abc import ABC, abstractmethod
-import dask.array as da
-from dask.array import Array
 import json
-import matplotlib.pyplot as plt
-from matplotlib_scalebar.scalebar import ScaleBar
-import numpy as np
-from numpy import ndarray
 import os
+from abc import ABC, abstractmethod
 from typing import List
+
+import dask.array as da
+import matplotlib.pyplot as plt
+import numpy as np
+from dask.array import Array
+from matplotlib_scalebar.scalebar import ScaleBar
+from numpy import ndarray
+
 
 class Image(ABC):
     def __init__(self, image: Array, info: dict, channel_names: List[str]) -> None:

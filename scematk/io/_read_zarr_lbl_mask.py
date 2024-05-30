@@ -1,8 +1,11 @@
-from ..image._label_mask import LabelMask
-import dask.array as da
 import json
 import os
 from typing import List
+
+import dask.array as da
+
+from ..image._label_mask import LabelMask
+
 
 def read_zarr_lbl_mask(zarr_path: str, meta_path: str, mask_name: List[str] | str | None = None) -> LabelMask:
     """Read a Zarr array and JSON metadata file into a LabelMask.

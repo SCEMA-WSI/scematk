@@ -1,8 +1,11 @@
-from ..image._binary_mask import BinaryMask
-import dask.array as da
 import json
 import os
 from typing import List
+
+import dask.array as da
+
+from ..image._binary_mask import BinaryMask
+
 
 def read_zarr_bin_mask(zarr_path: str, meta_path: str, mask_name: List[str] | str | None = None) -> BinaryMask:
     """Read a Zarr array and JSON metadata file into a BinaryMask.

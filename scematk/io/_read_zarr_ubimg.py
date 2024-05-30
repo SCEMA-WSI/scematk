@@ -1,8 +1,11 @@
-from ..image._ubyte_image import UByteImage
-import dask.array as da
 import json
 import os
 from typing import List
+
+import dask.array as da
+
+from ..image._ubyte_image import UByteImage
+
 
 def read_zarr_ubimg(zarr_path: str, meta_path: str, channel_names: List[str] | None = None) -> UByteImage:
     """Read a Zarr array and JSON metadata file into a UByteImage.

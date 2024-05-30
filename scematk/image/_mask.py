@@ -1,6 +1,9 @@
-from ._image import Image
-from dask.array import Array
 from typing import List
+
+from dask.array import Array
+
+from ._image import Image
+
 
 class Mask(Image):
     def __init__(self, image: Array, info: dict, channel_names: List[str]) -> None:

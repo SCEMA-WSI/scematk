@@ -1,8 +1,11 @@
-from ._mask import Mask
+from typing import List
+
 import dask.array as da
 from dask.array import Array
 from numpy import ndarray
-from typing import List
+
+from ._mask import Mask
+
 
 class LabelMask(Mask):
     def __init__(self, image: Array, info: dict, channel_names: List[str]) -> None:

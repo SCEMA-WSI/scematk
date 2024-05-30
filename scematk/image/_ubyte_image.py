@@ -1,9 +1,11 @@
 from._image import Image
-from dask.array import Array
+from typing import List
+
 import dask.array as da
 import numpy as np
+from dask.array import Array
 from numpy import ndarray
-from typing import List
+
 
 class UByteImage(Image):
     def __init__(self, image: Array, info: dict, channel_names: List[str]) -> None:
