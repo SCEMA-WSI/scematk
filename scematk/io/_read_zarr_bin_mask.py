@@ -13,7 +13,7 @@ def read_zarr_bin_mask(zarr_path: str, meta_path: str, mask_name: List[str] | st
         mask_name (List[str], str, optional): Name of the mask. Defaults to None. 
 
     Returns:
-        BinaryMask: _description_
+        BinaryMask: BinaryMask object.
     """
     assert isinstance(zarr_path, str)
     assert zarr_path.endswith('.zarr')
