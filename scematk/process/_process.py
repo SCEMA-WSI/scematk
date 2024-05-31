@@ -91,11 +91,11 @@ class Processor:
         """
         total_width = 400
         html = f' <div style="width: {total_width}px; background-color: #202020; padding: 20px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">'
-        html += f"<h1>SCEMATK Processor Object</h1>"
+        html += "<h1>SCEMATK Processor Object</h1>"
         if len(self.processes) == 0:
-            html += f"<p>Empty processor object</p>"
+            html += "<p>Empty processor object</p>"
         else:
-            html += f"<p>Processor object with processes:</p>"
+            html += "<p>Processor object with processes:</p>"
             for i, proc in enumerate(self.processes):
                 html += f"<p>({i+1}) {proc.name}</p>"
         html += "</div>"
