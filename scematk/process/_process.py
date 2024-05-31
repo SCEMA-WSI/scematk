@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from typing import List
 
 from ..image._image import Image
 
@@ -27,9 +28,22 @@ class Process(ABC):
 
 
 class Processor:
-    def __init__(self) -> None:
-        """Constructor for Processor class"""
-        self.processes = []
+    def __init__(self, processes: List[Process] | None = None) -> None:
+        """Constructor for Processor class
+
+        Args:
+            processes (List[Process] | None, optional): A list of SCEMATK Process objects. Defaults to None.
+        """
+        assert processes is None or isinstance(
+            processes, list
+        ), "processes must be a list of Process objects"
+        assert processes is None or all(
+            isinstance(proc, Process) for proc in processes
+        ), "processes must be a list of Process objects"
+        if processes is None:
+            self.processes = []
+        else:
+            self.processes = processes
 
     def add_process(self, process: Process) -> None:
         """Add a process to the processor
