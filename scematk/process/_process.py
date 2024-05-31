@@ -25,10 +25,10 @@ class Process(ABC):
         """
         pass
 
-class Processor():
+
+class Processor:
     def __init__(self) -> None:
-        """Constructor for Processor class
-        """
+        """Constructor for Processor class"""
         self.processes = []
 
     def add_process(self, process: Process) -> None:
@@ -37,7 +37,7 @@ class Processor():
         Args:
             process (Process): A SCEMATK Process object
         """
-        assert isinstance(process, Process), 'process must be a Process'
+        assert isinstance(process, Process), "process must be a Process"
         self.processes.append(process)
 
     def run(self, image: Image) -> Image:
@@ -49,7 +49,7 @@ class Processor():
         Returns:
             Image: A SCEMATK Image object
         """
-        assert isinstance(image, Image), 'image must be an Image'
+        assert isinstance(image, Image), "image must be an Image"
         image = image
         for process in self.processes:
             image = process.run(image)
@@ -77,12 +77,12 @@ class Processor():
         """
         total_width = 400
         html = f' <div style="width: {total_width}px; background-color: #202020; padding: 20px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">'
-        html += f'<h1>SCEMATK Processor Object</h1>'
+        html += f"<h1>SCEMATK Processor Object</h1>"
         if len(self.processes) == 0:
-            html += f'<p>Empty processor object</p>'
+            html += f"<p>Empty processor object</p>"
         else:
-            html += f'<p>Processor object with processes:</p>'
+            html += f"<p>Processor object with processes:</p>"
             for i, proc in enumerate(self.processes):
-                html += f'<p>({i+1}) {proc.name}</p>'
-        html += '</div>'
+                html += f"<p>({i+1}) {proc.name}</p>"
+        html += "</div>"
         return html
