@@ -20,6 +20,7 @@ authors = [
 requires-python = ">=3.8"
 dependencies = [
   "dask>=2021.6.0",
+  "dask-image>=0.6.0",
   "matplotlib>=3.4.3",
   "matplotlib_scalebar>=0.7.2",
   "numpy>=1.20.0",
