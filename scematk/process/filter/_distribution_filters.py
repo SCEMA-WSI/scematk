@@ -9,7 +9,7 @@ from skimage.morphology import disk
 
 from ...image._image import Image
 from ...image._ubyte_image import UByteImage
-from ...process import Process
+from ...process._process import Process
 
 
 class MaximumFilter(Process):
