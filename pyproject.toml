@@ -24,6 +24,7 @@ dependencies = [
   "matplotlib_scalebar>=0.7.2",
   "numpy>=1.20.0",
   "openslide-python>=1.1.2",
+  "scikit-image>=0.18.3",
   "tqdm>=4.62.3",
   "zarr>=2.10.0",
 ]
