@@ -49,3 +49,9 @@ __pycache__
 
 docs/build
 site/
+
+# Development environment configuration
+
+.env
+env/
+sandbox/
