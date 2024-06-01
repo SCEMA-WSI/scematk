@@ -48,9 +48,9 @@ class Image(ABC):
             if float(self.info["mpp-x"]) == float(self.info["mpp-y"]):
                 self.mpp = float(self.info["mpp-x"])
             else:
-                self.mpp = None
+                self.mpp = 0.0
         else:
-            self.mpp = None
+            self.mpp = 0.0
         self.channel_names = channel_names
 
     def save_image(self, path: str, overwrite: bool = False) -> None:
@@ -121,7 +121,7 @@ class Image(ABC):
         """
         assert isinstance(micron, (int, float)), "micron must be a number"
         assert micron > 0, "micron must be positive"
-        if not self.mpp or not isinstance(self.mpp, (int, float)):
+        if not self.mpp or not isinstance(self.mpp, (int, float)) or self.mpp <= 0:
             raise ValueError("Microns per pixel (mpp) not available")
         return micron / self.mpp
 
