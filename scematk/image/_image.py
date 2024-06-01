@@ -43,10 +43,10 @@ class Image(ABC):
         self.dtype = str(image.dtype)
         self.name = info.get("name", None)
         if "mpp" in self.info:
-            self.mpp = self.info["mpp"]
+            self.mpp = float(self.info["mpp"])
         elif "mpp-x" in self.info and "mpp-y" in self.info:
-            if self.info["mpp-x"] == self.info["mpp-y"]:
-                self.mpp = self.info["mpp-x"]
+            if float(self.info["mpp-x"]) == float(self.info["mpp-y"]):
+                self.mpp = float(self.info["mpp-x"])
             else:
                 self.mpp = None
         else:
