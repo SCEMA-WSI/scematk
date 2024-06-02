@@ -212,9 +212,9 @@ class Image(ABC):
         channel: str | None = None,
         scalebar: bool = True,
         scalebar_location: str = "lower right",
-        overlay: 'Image' | None = None,
+        overlay: "Image" | None = None,
         invert_overlay: bool = False,
-        overlay_cmap: str | None = None
+        overlay_cmap: str | None = None,
     ) -> None:
         """Display a region of the WSI image
 
@@ -260,7 +260,9 @@ class Image(ABC):
                 cmap = "jet"
         plt.imshow(region, cmap=cmap)
         if overlay:
-            img_overlay, alpha_img, cmap = overlay._get_region_overlay(y_min, x_min, y_len, x_len, pad, invert_overlay=invert_overlay)
+            img_overlay, alpha_img, cmap = overlay._get_region_overlay(
+                y_min, x_min, y_len, x_len, pad, invert_overlay=invert_overlay
+            )
             if img_overlay is not None:
                 cmap = overlay_cmap if overlay_cmap else cmap
                 plt.imshow(img_overlay, alpha=alpha_img, cmap=cmap)
@@ -293,7 +295,7 @@ class Image(ABC):
         target_size: int = 512,
         scalebar: bool = True,
         scalebar_location: str = "lower right",
-        overlay: 'Image' | None = None,
+        overlay: "Image" | None = None,
         invert_overlay: bool = False,
         overlay_cmap: str | None = None,
         grid_lines: str | None = None,
@@ -332,7 +334,9 @@ class Image(ABC):
         if coarsen_factor == 0:
             coarsen_factor = 1
         if overlay:
-            img_overlay, alpha_img, overlay_cmap = overlay._get_thumb_overlay(coarsen_factor, invert_overlay=invert_overlay)
+            img_overlay, alpha_img, overlay_cmap = overlay._get_thumb_overlay(
+                coarsen_factor, invert_overlay=invert_overlay
+            )
             if img_overlay is not None:
                 plt.imshow(img_overlay, alpha=alpha_img, cmap=overlay_cmap)
         if grid_lines:
