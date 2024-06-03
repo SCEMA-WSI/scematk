@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Tuple
 
 import dask.array as da
 from dask.array import Array
@@ -37,3 +37,47 @@ class BinaryMask(Mask):
         image = image.astype("float32")
         thumb = da.coarsen(da.mean, image, {0: coarsen_factor, 1: coarsen_factor}, trim_excess=True)
         return thumb.compute()
+
+    def _get_region_overlay(
+        self,
+        y_min: int,
+        x_min: int,
+        y_len: int,
+        x_len: int,
+        pad: bool = True,
+        invert_overlay: bool = False,
+    ) -> Tuple[ndarray | None, ndarray | None, str | None]:
+        """Get a region of the mask as an overlay
+
+        Args:
+            y_min (int): The minimum y coordinate of the region
+            x_min (int): The minimum x coordinate of the region
+            y_len (int): The length of the region in the y direction
+            x_len (int): The length of the region in the x direction
+            pad (bool): Whether to pad the region around the edges
+            invert_overlay (bool, optional): Whether to invert the overlay. Defaults to False.
+
+        Returns:
+            Tuple[ndarray | None, ndarray | None, str | None]: The mask region, the alpha channel, and the colormap
+        """
+        region = self.read_region(y_min, x_min, y_len, x_len, pad=pad)
+        cmap = "gray"
+        if invert_overlay:
+            region = 1 - region
+            cmap = "gray_r"
+        return region, (1 - region).astype("float32"), cmap
+    
+    def _get_thumb_overlay(self, coarsen_factor: int, invert_overlay: bool = False) -> Tuple[ndarray | None | str]:
+        assert isinstance(coarsen_factor, int), "coarsen_factor must be an integer"
+        assert coarsen_factor > 0, "coarsen_factor must be greater than 0"
+        assert isinstance(invert_overlay, bool), "invert_overlay must be a boolean"
+        image = self.image
+        image = image.astype('float32')
+        thumb = da.coarsen(da.mean, image, {0: coarsen_factor, 1: coarsen_factor}, trim_excess=True).compute()
+        if invert_overlay:
+            thumb = 1 - thumb
+        alpha_channel = 1 - thumb.astype('float32')
+        if invert_overlay:
+            thumb = 1 - thumb
+        cmap = 'gray'
+        return thumb, alpha_channel, cmap
