@@ -66,18 +66,22 @@ class BinaryMask(Mask):
             region = 1 - region
             cmap = "gray_r"
         return region, (1 - region).astype("float32"), cmap
-    
-    def _get_thumb_overlay(self, coarsen_factor: int, invert_overlay: bool = False) -> Tuple[ndarray | None | str]:
+
+    def _get_thumb_overlay(
+        self, coarsen_factor: int, invert_overlay: bool = False
+    ) -> Tuple[ndarray | None, ndarray | None, str | None]:
         assert isinstance(coarsen_factor, int), "coarsen_factor must be an integer"
         assert coarsen_factor > 0, "coarsen_factor must be greater than 0"
         assert isinstance(invert_overlay, bool), "invert_overlay must be a boolean"
         image = self.image
-        image = image.astype('float32')
-        thumb = da.coarsen(da.mean, image, {0: coarsen_factor, 1: coarsen_factor}, trim_excess=True).compute()
+        image = image.astype("float32")
+        thumb = da.coarsen(
+            da.mean, image, {0: coarsen_factor, 1: coarsen_factor}, trim_excess=True
+        ).compute()
         if invert_overlay:
             thumb = 1 - thumb
-        alpha_channel = 1 - thumb.astype('float32')
+        alpha_channel = 1 - thumb.astype("float32")
         if invert_overlay:
             thumb = 1 - thumb
-        cmap = 'gray'
+        cmap = "gray"
         return thumb, alpha_channel, cmap

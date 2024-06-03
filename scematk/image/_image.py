@@ -212,7 +212,7 @@ class Image(ABC):
         channel: str | None = None,
         scalebar: bool = True,
         scalebar_location: str = "lower right",
-        overlay: Optional['Image'] = None,
+        overlay: Optional["Image"] = None,
         invert_overlay: bool = False,
         overlay_cmap: str | None = None,
     ) -> None:
@@ -295,7 +295,7 @@ class Image(ABC):
         target_size: int = 512,
         scalebar: bool = True,
         scalebar_location: str = "lower right",
-        overlay: Optional['Image'] = None,
+        overlay: Optional["Image"] = None,
         invert_overlay: bool = False,
         overlay_cmap: str | None = None,
         grid_lines: str | None = None,
