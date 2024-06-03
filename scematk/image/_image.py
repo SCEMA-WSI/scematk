@@ -1,7 +1,7 @@
 import json
 import os
 from abc import ABC, abstractmethod
-from typing import List
+from typing import List, Optional, Tuple
 
 import dask.array as da
 import matplotlib.pyplot as plt
@@ -212,6 +212,9 @@ class Image(ABC):
         channel: str | None = None,
         scalebar: bool = True,
         scalebar_location: str = "lower right",
+        overlay: Optional["Image"] = None,
+        invert_overlay: bool = False,
+        overlay_cmap: str | None = None,
     ) -> None:
         """Display a region of the WSI image
 
@@ -224,12 +227,18 @@ class Image(ABC):
             channel (str, optional): A channel name. If specified, only the requested channel will be displayed. Defaults to None.
             scalebar (bool, optional): Whether to include a scalebar. Defaults to True.
             scalebar_location (str, optional): The location of the scalebar, if it is to be included. Defaults to "lower right".
+            overlay (Image, optional): An image object to overlay on the region. Defaults to None.
+            invert_overlay (bool, optional): Whether to invert the overlay image. Defaults to False.
+            overlay_cmap (str, optional): The colour map to use for the overlay image. Defaults to None.
 
         Raises:
             NotImplementedError: Only 1, 2, or 3 channels supported
         """
         assert isinstance(scalebar, bool), "scalebar must be a boolean"
         assert isinstance(scalebar_location, str), "scalebar_location must be a string"
+        assert isinstance(overlay, (Image, type(None))), "overlay must be an Image object or None"
+        assert isinstance(invert_overlay, bool), "invert_overlay must be a boolean"
+        assert isinstance(overlay_cmap, (str, type(None))), "overlay_cmap must be a string or None"
         if "mpp" not in self.info:
             scalebar = False
         region = self.read_region(y_min, x_min, y_len, x_len, pad, channel)
@@ -250,6 +259,13 @@ class Image(ABC):
             elif self.dtype in ["int", "int32", "int64"]:
                 cmap = "jet"
         plt.imshow(region, cmap=cmap)
+        if overlay:
+            img_overlay, alpha_img, cmap = overlay._get_region_overlay(
+                y_min, x_min, y_len, x_len, pad, invert_overlay=invert_overlay
+            )
+            if img_overlay is not None:
+                cmap = overlay_cmap if overlay_cmap else cmap
+                plt.imshow(img_overlay, alpha=alpha_img, cmap=cmap)
         if scalebar:
             scalebar = ScaleBar(
                 self.mpp,
@@ -279,6 +295,9 @@ class Image(ABC):
         target_size: int = 512,
         scalebar: bool = True,
         scalebar_location: str = "lower right",
+        overlay: Optional["Image"] = None,
+        invert_overlay: bool = False,
+        overlay_cmap: str | None = None,
         grid_lines: str | None = None,
     ) -> None:
         """Display a thumbnail of the WSI image
@@ -299,6 +318,9 @@ class Image(ABC):
             "upper right",
             "upper left",
         ], "scalebar_location must be one of 'lower right', 'lower left', 'upper right', or 'upper left'"
+        assert isinstance(overlay, (Image, type(None))), "overlay must be an Image object or None"
+        assert isinstance(invert_overlay, bool), "invert_overlay must be a boolean"
+        assert isinstance(overlay_cmap, (str, type(None))), "overlay_cmap must be a string or None"
         assert isinstance(grid_lines, (str, type(None))), "grid_lines must be a string or None"
         if not self.mpp:
             scalebar = False
@@ -311,6 +333,12 @@ class Image(ABC):
         coarsen_factor = max([s // target_size for s in self.shape])
         if coarsen_factor == 0:
             coarsen_factor = 1
+        if overlay:
+            img_overlay, alpha_img, overlay_cmap = overlay._get_thumb_overlay(
+                coarsen_factor, invert_overlay=invert_overlay
+            )
+            if img_overlay is not None:
+                plt.imshow(img_overlay, alpha=alpha_img, cmap=overlay_cmap)
         if grid_lines:
             spacing = 10000 // coarsen_factor
             y_spacing = range(spacing, thumb.shape[0], spacing)
@@ -334,6 +362,44 @@ class Image(ABC):
             plt.gca().add_artist(scalebar)
         plt.axis("off")
         plt.show()
+
+    def _get_region_overlay(
+        self,
+        y_min: int,
+        x_min: int,
+        y_len: int,
+        x_len: int,
+        pad: bool = True,
+        invert_overlay: bool = False,
+    ) -> Tuple[ndarray | None, ndarray | None, str | None]:
+        """Get the overlay of an image region to superimpose on another image
+
+        Args:
+            y_min (int): The minimum y-coordinate of the region
+            x_min (int): The minimum x-coordinate of the region
+            y_len (int): The length of the region in the y direction
+            x_len (int): The length of the region in the x direction
+            pad (bool, optional): Whether to pad the regions outside the image with zeros. Defaults to True.
+            invert_overlay (bool, optional): Whether to invert the overlay region. Defaults to False.
+
+        Returns:
+            Tuple[ndarray | None, ndarray | None, str | None]: The overlay to superimpose on the image, the alpha channel of the overlay, and the colour map to use for the overlay
+        """
+        return None, None, None
+
+    def _get_thumb_overlay(
+        self, coarsen_factor: int, invert_overlay: bool = False
+    ) -> Tuple[ndarray | None, ndarray | None, str | None]:
+        """Get the overlay of a thumbnail image to superimpose on another image
+
+        Args:
+            coarsen_factor (int): The coarsen factor to use to generate the thumbnail
+            invert_overlay (bool, optional): Whether to invert the overlay thumbnail. Defaults to False.
+
+        Returns:
+            Tuple[ndarray | None, ndarray | None, str | None]: The overlay to superimpose on the image, the alpha channel of the overlay, and the colour map to use for the overlay
+        """
+        return None, None, None
 
     def _repr_html_(self) -> str:
         """Generate an HTML representation of the Image object
