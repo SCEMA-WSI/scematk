@@ -22,24 +22,24 @@ def segment_stardist(
     Segment an image using the StarDist model.
     
     Parameters:
-    in_path (str): Path to the input zarr file.
-    out_path (str): Path to the output zarr file.
-    model (str): Model to use. Default is '2D_versatile_he'.
-    axes (str): Axes of the input image. Default is 'YXC'.
-    block_size (int): Size of the blocks to process. Default is 4096.
-    min_overlap (int): Minimum overlap between blocks. Default is 128.
-    context (int): Context for the prediction. Default is 128.
-    n_tiles (tuple): Number of tiles to use. Default is (4,4,1).
-    prob_thresh (float): Probability threshold. Default is 0.2.
-    nms_thresh (float): NMS threshold. Default is 0.3.
-    skip_warning (bool): Skip the warning message. Default is False.
+        in_path (str): Path to the input zarr file.
+        out_path (str): Path to the output zarr file.
+        model (str): Model to use. Default is '2D_versatile_he'.
+        axes (str): Axes of the input image. Default is 'YXC'.
+        block_size (int): Size of the blocks to process. Default is 4096.
+        min_overlap (int): Minimum overlap between blocks. Default is 128.
+        context (int): Context for the prediction. Default is 128.
+        n_tiles (tuple): Number of tiles to use. Default is (4,4,1).
+        prob_thresh (float): Probability threshold. Default is 0.2.
+        nms_thresh (float): NMS threshold. Default is 0.3.
+        skip_warning (bool): Skip the warning message. Default is False.
     
     Returns:
-    None
+        None
     
     Raises:
-    AssertionError: If any of the input arguments are invalid.
-    ValueError: If the user chooses to exit.
+        AssertionError: If any of the input arguments are invalid.
+        ValueError: If the user chooses to exit.
     """
     assert isinstance(in_path, str), "Input path must be a string"
     assert os.path.exists(in_path), "Input path does not exist"
@@ -89,8 +89,8 @@ def segment_stardist(
     normalizer = MyNormalizer(mi, ma)
     image = zarr.open(in_path)
     out_zarr = zarr.zeros(shape=image.shape[:2], chunks=image.chunks[:2], dtype=np.int32)
-    model = StarDist2D.from_pretrained(model)
-    _, _ = model.predict_instances_big(
+    sd_model = StarDist2D.from_pretrained(model)
+    _, _ = sd_model.predict_instances_big(
         image, 
         axes=axes,
         block_size=block_size, 
