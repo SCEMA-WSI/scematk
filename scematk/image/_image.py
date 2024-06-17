@@ -52,6 +52,7 @@ class Image(ABC):
         else:
             self.mpp = 0.0
         self.channel_names = channel_names
+        self.interpolation_strat = "antialiased"
 
     def save_image(self, path: str, overwrite: bool = False) -> None:
         """Save the WSI image to a zarr file
@@ -258,14 +259,14 @@ class Image(ABC):
                 cmap = "gray"
             elif self.dtype in ["int", "int32", "int64"]:
                 cmap = "jet"
-        plt.imshow(region, cmap=cmap)
+        plt.imshow(region, interpolation=self.interpolation_strat, cmap=cmap)
         if overlay:
             img_overlay, alpha_img, cmap = overlay._get_region_overlay(
                 y_min, x_min, y_len, x_len, pad, invert_overlay=invert_overlay
             )
             if img_overlay is not None:
                 cmap = overlay_cmap if overlay_cmap else cmap
-                plt.imshow(img_overlay, alpha=alpha_img, cmap=cmap)
+                plt.imshow(img_overlay, alpha=alpha_img, cmap=cmap, interpolation="nearest")
         if scalebar:
             scalebar = ScaleBar(
                 self.mpp,

@@ -1,8 +1,9 @@
-from typing import List
+from typing import List, Tuple
 
 import dask.array as da
 from dask.array import Array
 from numpy import ndarray
+from stardist import random_label_cmap
 
 from ._mask import Mask
 
@@ -18,6 +19,7 @@ class LabelMask(Mask):
         """
         super().__init__(image, info, channel_names)
         assert image.dtype in [int, "int32", "int64"], "image must be an integer array"
+        self.interpolation_strat = "nearest"
 
     def get_thumb(self, target_size: int = 512) -> ndarray:
         """Get a thumbnail of the mask
@@ -37,3 +39,33 @@ class LabelMask(Mask):
         image = image.astype("float32")
         thumb = da.coarsen(da.mean, image, {0: coarsen_factor, 1: coarsen_factor}, trim_excess=True)
         return thumb.compute()
+
+    def _get_region_overlay(
+        self,
+        y_min: int,
+        x_min: int,
+        y_len: int,
+        x_len: int,
+        pad: bool = True,
+        invert_overlay: bool = False,
+    ) -> Tuple[ndarray | None, ndarray | None, str | None]:
+        """Get a region of the mask as an overlay
+
+        Args:
+            y_min (int): The minimum y coordinate of the region
+            x_min (int): The minimum x coordinate of the region
+            y_len (int): The length of the region in the y direction
+            x_len (int): The length of the region in the x direction
+            pad (bool): Whether to pad the region around the edges
+            invert_overlay (bool, optional): Whether to invert the overlay. Defaults to False.
+
+        Returns:
+            Tuple[ndarray | None, ndarray | None, str | None]: The mask region, the alpha channel, and the colormap
+        """
+        region = self.read_region(y_min, x_min, y_len, x_len, pad=pad)
+        alpha_region = region > 0
+        alpha_region = alpha_region.astype(float)
+        cmap = random_label_cmap()
+        if invert_overlay:
+            return None, None, None
+        return region, alpha_region, cmap
