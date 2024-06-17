@@ -19,7 +19,7 @@ class LabelMask(Mask):
         """
         super().__init__(image, info, channel_names)
         assert image.dtype in [int, "int32", "int64"], "image must be an integer array"
-        self.interpolation_strat = 'nearest'
+        self.interpolation_strat = "nearest"
 
     def get_thumb(self, target_size: int = 512) -> ndarray:
         """Get a thumbnail of the mask
@@ -39,7 +39,7 @@ class LabelMask(Mask):
         image = image.astype("float32")
         thumb = da.coarsen(da.mean, image, {0: coarsen_factor, 1: coarsen_factor}, trim_excess=True)
         return thumb.compute()
-    
+
     def _get_region_overlay(
         self,
         y_min: int,
