@@ -29,6 +29,7 @@ dependencies = [
   "openslide-python>=1.1.2",
   "requests>=2.26.0",
   "scikit-image>=0.18.3",
+  "shapely>=1.7.1",
   "stardist>=0.6.0",
   "tensorflow>=2.6.0",
   "tqdm>=4.62.3",

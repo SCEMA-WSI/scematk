@@ -10,6 +10,8 @@ from dask.array import Array
 from matplotlib_scalebar.scalebar import ScaleBar
 from numpy import ndarray
 
+from ..annotate._annotate import Annotation
+
 
 class Image(ABC):
     def __init__(self, image: Array, info: dict, channel_names: List[str]) -> None:
@@ -300,6 +302,7 @@ class Image(ABC):
         invert_overlay: bool = False,
         overlay_cmap: str | None = None,
         grid_lines: str | None = None,
+        annotate: Optional[Annotation] = None,
     ) -> None:
         """Display a thumbnail of the WSI image
 
@@ -308,6 +311,7 @@ class Image(ABC):
             scalebar (bool, optional): Whether to include a scalebar. Defaults to True.
             scalebar_location (str, optional): The location of the scalebar, if it is to be included. Defaults to "lower right".
             grid_lines (str, optional): Whether to plot grid lines at every 10,000 pixels. To plot, specify the colour you would like the lines to be. Defaults to None.
+            annotate (Annotation, optional): An annotation object to overlay on the thumbnail. Defaults to None.
         """
         assert isinstance(target_size, int), "target_size must be an integer"
         assert target_size > 0, "target_size must be positive"
@@ -323,6 +327,9 @@ class Image(ABC):
         assert isinstance(invert_overlay, bool), "invert_overlay must be a boolean"
         assert isinstance(overlay_cmap, (str, type(None))), "overlay_cmap must be a string or None"
         assert isinstance(grid_lines, (str, type(None))), "grid_lines must be a string or None"
+        assert isinstance(
+            annotate, (Annotation, type(None))
+        ), "annotate must be an Annotation object or None"
         if not self.mpp:
             scalebar = False
         thumb = self.get_thumb(target_size)
@@ -349,6 +356,12 @@ class Image(ABC):
                 plt.axhline(y, color=grid_line_col, linestyle="--")
             for x in x_spacing:
                 plt.axvline(x, color=grid_line_col, linestyle="--")
+        if annotate:
+            colour = annotate.colour
+            annotation = annotate._get_annotation_thumb(coarsen_factor)
+            if annotation:
+                for contour in annotation:
+                    plt.plot(*contour.xy, color=colour)
         if scalebar:
             coarsen_factor = max([s // target_size for s in self.shape])
             if coarsen_factor == 0:
