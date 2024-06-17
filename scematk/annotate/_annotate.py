@@ -1,7 +1,7 @@
 from abc import ABC
 from typing import List, Optional, Tuple
 
-from shapely.geometry import LineString, Polygon
+from shapely.geometry import LineString
 
 
 class Annotation(ABC):
