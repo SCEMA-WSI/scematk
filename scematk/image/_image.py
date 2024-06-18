@@ -9,6 +9,7 @@ import numpy as np
 from dask.array import Array
 from matplotlib_scalebar.scalebar import ScaleBar
 from numpy import ndarray
+from stardist import random_label_cmap
 
 from ..annotate._annotate import Annotation
 
@@ -260,7 +261,7 @@ class Image(ABC):
             if self.dtype == "bool":
                 cmap = "gray"
             elif self.dtype in ["int", "int32", "int64"]:
-                cmap = "jet"
+                cmap = random_label_cmap()
         plt.imshow(region, interpolation=self.interpolation_strat, cmap=cmap)
         if overlay:
             img_overlay, alpha_img, cmap = overlay._get_region_overlay(
