@@ -74,7 +74,7 @@ class ExpansionSegmenter(SecondarySegmenter):
         img = da.map_overlap(
             lambda x: expand_labels(x, distance=distance), img, depth=depth, dtype=img.dtype
         )
-        expanded_image = LabelMask(img, image.info, channel_names=['Mask'])
+        expanded_image = LabelMask(img, image.info, channel_names=["Mask"])
         return self.postprocessor.run(expanded_image)
 
     def fit_and_run(self, image: Image) -> Image:
