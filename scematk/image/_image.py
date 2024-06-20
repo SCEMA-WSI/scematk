@@ -56,6 +56,17 @@ class Image(ABC):
             self.mpp = 0.0
         self.channel_names = channel_names
         self.interpolation_strat = "antialiased"
+    
+    def set_channel_names(self, channel_names: Optional[List[str] | str]) -> None:
+        if not isinstance(channel_names, list):
+            channel_names = [channel_names]
+        assert isinstance(channel_names, list), "channel_names must be a list"
+        assert all(isinstance(name, str) for name in channel_names), "All channel names must be strings"
+        if self.ndim == 3:
+            assert len(channel_names) == self.shape[2], "number of channel names must match number of channels in image"
+        else:
+            assert len(channel_names) == 1, "number of channel names must match number of channels in image"
+        self.channel_names = channel_names
 
     def save_image(self, path: str, overwrite: bool = False) -> None:
         """Save the WSI image to a zarr file
