@@ -46,12 +46,11 @@ class ExpansionSegmenter(SecondarySegmenter):
         """
         pass
 
-    def run(self, image: Image, mask_name: Optional[str] = None) -> Image:
+    def run(self, image: Image) -> Image:
         """Run the segmenter on the image.
 
         Args:
             image (Image): Image to run the segmenter on.
-            mask_name (str, optional): Name of the mask. Defaults to None.
 
         Raises:
             ValueError: Image must be an instance of LabelMask
@@ -60,9 +59,6 @@ class ExpansionSegmenter(SecondarySegmenter):
             Image: Image with expanded labels.
         """
         assert isinstance(image, LabelMask), "Image must be an instance of LabelMask"
-        assert isinstance(mask_name, str) or mask_name is None, "Mask name must be a string or None"
-        if mask_name is None:
-            mask_name = "Mask"
         image = self.preprocessor.run(image)
         distance = self.distance
         units = self.units
@@ -78,21 +74,19 @@ class ExpansionSegmenter(SecondarySegmenter):
         img = da.map_overlap(
             lambda x: expand_labels(x, distance=distance), img, depth=depth, dtype=img.dtype
         )
-        mask_name_list = [mask_name] if not isinstance(mask_name, list) else mask_name
-        expanded_image = LabelMask(img, image.info, channel_names=mask_name_list)
+        expanded_image = LabelMask(img, image.info, channel_names=['Mask'])
         return self.postprocessor.run(expanded_image)
 
-    def fit_and_run(self, image: LabelMask, mask_name: str = None) -> LabelMask:
+    def fit_and_run(self, image: Image) -> Image:
         """Fit the segmenter to the image and run the segmenter on the image.
 
         Args:
             image (LabelMask): Image to fit the segmenter to and run the segmenter on.
-            mask_name (str, optional): Name of the mask. Defaults to None.
 
         Returns:
             LabelMask: Image with expanded labels.
         """
-        return self.run(image, mask_name)
+        return self.run(image)
 
     def _default_preprocessor(self) -> Processor:
         """Create a default preprocessor for the segmenter.

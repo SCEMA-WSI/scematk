@@ -1,11 +1,16 @@
+from typing import Optional
+
 from ...process._process import Processor
 from .._segmenter import Segmenter
 
-from typing import Optional
-
 
 class SecondarySegmenter(Segmenter):
-    def __init__(self, name: str, preprocessor: Optional[Processor] = None, postprocessor: Optional[Processor] = None):
+    def __init__(
+        self,
+        name: str,
+        preprocessor: Optional[Processor] = None,
+        postprocessor: Optional[Processor] = None,
+    ):
         """Secondary segmenter class.
 
         Args:

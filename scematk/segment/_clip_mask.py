@@ -3,6 +3,7 @@ from ..image._image import Image
 from ..image._label_mask import LabelMask
 from ..image._ubyte_image import UByteImage
 
+
 def clip_mask(image: Image, mask: BinaryMask) -> Image:
     assert isinstance(image, Image), "image must be an Image"
     assert isinstance(mask, BinaryMask), "mask must be a BinaryMask"
