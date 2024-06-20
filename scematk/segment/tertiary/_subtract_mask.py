@@ -1,7 +1,5 @@
 from typing import List, Optional
 
-import dask.array as da
-
 from ...image._label_mask import LabelMask
 
 

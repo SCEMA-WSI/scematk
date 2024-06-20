@@ -57,11 +57,11 @@ class Image(ABC):
         self.channel_names = channel_names
         self.interpolation_strat = "antialiased"
     
-    def set_channel_names(self, channel_names: Optional[List[str] | str]) -> None:
-        if not isinstance(channel_names, list):
+    def set_channel_names(self, channel_names: List[str] | str) -> None:
+        if isinstance(channel_names, str):
             channel_names = [channel_names]
-        assert isinstance(channel_names, list), "channel_names must be a list"
-        assert all(isinstance(name, str) for name in channel_names), "All channel names must be strings"
+        assert isinstance(channel_names, list), "channel_names must be a list of strings"
+        assert all(isinstance(name, str) for name in channel_names), "all elements of channel_names must be strings"
         if self.ndim == 3:
             assert len(channel_names) == self.shape[2], "number of channel names must match number of channels in image"
         else:
