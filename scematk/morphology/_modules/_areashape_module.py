@@ -74,7 +74,7 @@ class AreaShapeModule(_ABCModule):
         data = pd.DataFrame(data)
         data.rename(
             columns={
-                "label": f"Meta_Global_Mask_Label",
+                "label": "Meta_Global_Mask_Label",
                 "area": f"{self.name}_{mask_name}_Mask_Area",
                 "area_convex": f"{self.name}_{mask_name}_Mask_AreaConvex",
                 "area_filled": f"{self.name}_{mask_name}_Mask_AreaFilled",
