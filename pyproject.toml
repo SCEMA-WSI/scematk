@@ -15,7 +15,7 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
 authors = [
-    {name = "Allen Institute for Artificial Intelligence", email = "contact@allenai.org"}
+    {name = "Hugh Warden", email = "hugh.warden@outlook.com"}
 ]
 requires-python = ">=3.8"
 dependencies = [
