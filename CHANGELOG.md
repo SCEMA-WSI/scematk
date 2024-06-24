@@ -7,5 +7,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-## [v0.1.0](https://github.com/SCEMA-WSI/scematk/releases/tag/v0.1.0) - 2024-05-29 
+## [v0.0.3](https://github.com/SCEMA-WSI/scematk/releases/tag/v0.0.3) - 2024-06-24
 
