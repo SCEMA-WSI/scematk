@@ -255,6 +255,9 @@ class Image(ABC):
             overlay (Image, optional): An image object to overlay on the region. Defaults to None.
             invert_overlay (bool, optional): Whether to invert the overlay image. Defaults to False.
             overlay_cmap (str, optional): The colour map to use for the overlay image. Defaults to None.
+            data (dd.DataFrame, optional): The data to overlay on the image.
+            plot_object (str, optional): The object to plot on the image.
+            feature (str, optional): The morphological feature to colour the plot on the image.
 
         Raises:
             NotImplementedError: Only 1, 2, or 3 channels supported
