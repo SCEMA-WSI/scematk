@@ -4,6 +4,7 @@ from abc import ABC, abstractmethod
 from typing import List, Optional, Tuple
 
 import dask.array as da
+import dask.dataframe as dd
 import matplotlib.pyplot as plt
 import numpy as np
 from dask.array import Array
@@ -236,6 +237,9 @@ class Image(ABC):
         overlay: Optional["Image"] = None,
         invert_overlay: bool = False,
         overlay_cmap: str | None = None,
+        data: Optional[dd.DataFrame] = None,
+        plot_object: Optional[str] = None,
+        feature: Optional[str] = None,
     ) -> None:
         """Display a region of the WSI image
 
@@ -287,6 +291,18 @@ class Image(ABC):
             if img_overlay is not None:
                 cmap = overlay_cmap if overlay_cmap else cmap
                 plt.imshow(img_overlay, alpha=alpha_img, cmap=cmap, interpolation="nearest")
+        if (data is not None) & (plot_object is not None) & (feature is not None):
+            x_axis_label = f"Meta_{plot_object}_Mask_CentroidX"
+            y_axis_label = f"Meta_{plot_object}_Mask_CentroidY"
+            assert x_axis_label in data.columns, "plot object not found in data"
+            assert y_axis_label in data.columns, "plot object not found in data"
+            assert feature in data.columns, "feature not found in data"
+            data_f = data[data[x_axis_label] > x_min]
+            data_f = data_f[data_f[y_axis_label] > y_min]
+            data_f = data_f[data_f[x_axis_label] < x_min + x_len]
+            data_f = data_f[data_f[y_axis_label] < y_min + y_len]
+            data_fc = data_f.compute()
+            plt.scatter(data_fc[x_axis_label] - x_min, data_fc[y_axis_label] - y_min, c=data_fc[feature], s=8)
         if scalebar:
             scalebar = ScaleBar(
                 self.mpp,
