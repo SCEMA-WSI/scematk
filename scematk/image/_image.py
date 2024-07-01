@@ -264,6 +264,9 @@ class Image(ABC):
         assert isinstance(overlay, (Image, type(None))), "overlay must be an Image object or None"
         assert isinstance(invert_overlay, bool), "invert_overlay must be a boolean"
         assert isinstance(overlay_cmap, (str, type(None))), "overlay_cmap must be a string or None"
+        assert isinstance(data, (dd.DataFrame, type(None))), "data must be a dask dataframe or None"
+        assert isinstance(plot_object, (str, type(None))), "plot_object must be a string or None"
+        assert isinstance(feature, (str, type(None))), "feature must be a string or None"
         if "mpp" not in self.info:
             scalebar = False
         region = self.read_region(y_min, x_min, y_len, x_len, pad, channel)
