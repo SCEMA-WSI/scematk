@@ -47,12 +47,15 @@ class ReinhardNormaliser(Normaliser):
         masked_lab_img = da.ma.masked_array(lab_img, mask)
         means = da.mean(masked_lab_img, axis=(0, 1))
         stds = da.std(masked_lab_img, axis=(0, 1))
-        outs = da.ma.getdata(da.stack([means, stds], axis=1))
+        outs = da.ma.getdata(da.stack([means, stds], axis=1)).compute()
         old_means = outs[:, 0]
         old_stds = outs[:, 1]
         new_means = self.means
         new_stds = self.stds
-        normalised_lab_img = (lab_img - old_means) * new_stds / old_stds + new_means
+        normalised_lab_img = lab_img - old_means
+        normalised_lab_img = normalised_lab_img / old_stds
+        normalised_lab_img = normalised_lab_img * new_stds
+        normalised_lab_img = normalised_lab_img + new_means
         normalised_float_img = da.map_blocks(lab2rgb, normalised_lab_img, dtype=float)
         normalised_float_img = da.clip(normalised_float_img, 0, 1)
         normalised_img = da.map_blocks(img_as_ubyte, normalised_float_img, dtype=np.uint8)
