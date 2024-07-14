@@ -11,7 +11,7 @@ from skimage.segmentation import clear_border, find_boundaries
 from ._abc_module import _ABCModule
 
 
-def intensity_std(mask: ndarray, img: ndarray) -> float:
+def intensity_stdd(mask: ndarray, img: ndarray) -> float:
     """Get the standard deviation of stain intensity in an image region
 
     Args:
@@ -160,7 +160,7 @@ class IntensityModule(_ABCModule):
             intensity_image=image,
             properties=["label", "intensity_max", "intensity_mean", "intensity_min"],
             extra_properties=[
-                intensity_std,
+                intensity_stdd,
                 intensity_median,
                 border_mean,
                 border_min,
@@ -177,7 +177,7 @@ class IntensityModule(_ABCModule):
                 f"intensity_mean-{i}"
             ] = f"Intensity_{mask_name}_{channel_name}_MeanIntensity"
             rename_dict[f"intensity_min-{i}"] = f"Intensity_{mask_name}_{channel_name}_MinIntensity"
-            rename_dict[f"intensity_std-{i}"] = f"Intensity_{mask_name}_{channel_name}_StdIntensity"
+            rename_dict[f"intensity_stdd-{i}"] = f"Intensity_{mask_name}_{channel_name}_StdIntensity"
             rename_dict[
                 f"intensity_median-{i}"
             ] = f"Intensity_{mask_name}_{channel_name}_MedianIntensity"
