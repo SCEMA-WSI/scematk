@@ -24,6 +24,7 @@ class SimpleVariogram:
         use_nugget: bool = False,
         restrict_range: bool = False,
         range_min: float = 0.0,
+        local_exclusion: float = 0.0
     ) -> None:
         assert isinstance(max_distance, (float, int)), "max_distance should be a number"
         assert max_distance > 0, "max_distance should be positive"
@@ -53,6 +54,8 @@ class SimpleVariogram:
         assert isinstance(restrict_range, bool), "restrict_range should be a boolean"
         assert isinstance(range_min, (float, int)), "range_min should be a number"
         assert range_min >= 0, "range_min can't be negative"
+        assert isinstance(local_exclusion, (int, float)), "Local exclusion must be a number"
+        assert local_exclusion >= 0, "Local exclusion can't be negative"
         self.max_distance = max_distance
         self.num_bins = num_bins
         self.prune = prune
@@ -62,6 +65,7 @@ class SimpleVariogram:
         self.use_nugget = use_nugget
         self.restrict_range = restrict_range
         self.range_min = range_min
+        self.local_exclusion = local_exclusion
         self.nugget: Optional[float] = None
         self.sill: Optional[float] = None
         self.range: Optional[float] = None
@@ -140,7 +144,7 @@ class SimpleVariogram:
     def _fit_structured_variogram(self) -> Tuple[Optional[float], Optional[float], Optional[float]]:
         if self.model == "empirical":
             return 0.0, 0.0, 0.0
-        valid_idx = self.counts > self.count_cut_off
+        valid_idx = (self.counts > self.count_cut_off) & (self.lags > self.local_exclusion)
         lags = self.lags[valid_idx]
         semivariances = self.semivariances[valid_idx]
         if self.model == "spherical":
@@ -254,6 +258,7 @@ class SimpleVariogram:
         count_cut_off: Optional[int] = None,
         restrict_range: Optional[bool] = None,
         range_min: Optional[float] = None,
+        local_exclusion: Optional[float] = None,
     ) -> None:
         assert self.fitted, "Variogram must be fitted first buy calling .fit() method."
         if model is not None:
@@ -279,6 +284,10 @@ class SimpleVariogram:
             assert isinstance(range_min, (float, int)), "range_min should be a number"
             assert range_min >= 0, "range_min can't be negative"
             self.range_min = range_min
+        if local_exclusion is not None:
+            assert isinstance(local_exclusion, (float, int)), "local_exclusion must be a number"
+            assert local_exclusion >= 0, "local_exclusion must not be negative"
+            self.local_exclusion = local_exclusion
         self.nugget, self.sill, self.range = self._fit_structured_variogram()
 
     def plot(
