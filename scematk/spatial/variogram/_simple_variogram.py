@@ -24,8 +24,22 @@ class SimpleVariogram:
         use_nugget: bool = False,
         restrict_range: bool = False,
         range_min: float = 0.0,
-        local_exclusion: float = 0.0
+        local_exclusion: float = 0.0,
     ) -> None:
+        """Constructor fo the simple variogram class
+
+        Args:
+            max_distance (float): The maximum distance between cells to calculate the semivariance.
+            num_bins (int): The number of bins to divide the observations into.
+            prune (float, optional): The proportion of cells to remove before calculation for a speed boost. Defaults to 0.0.
+            num_marginal_bins (Tuple[int, int] | int, optional): The number of bins to divide each axis into for computation. Defaults to 100.
+            count_cut_off (int, optional): The threshold of counts to include a bin in structural calculations. Defaults to 0.
+            model (str, optional): The structural model to use. One of empirical, spherical, exponential or gaussian. Defaults to "empirical".
+            use_nugget (bool, optional): Whether to allow a non-zero nugget effect. Defaults to False.
+            restrict_range (bool, optional): Whether to restrict the range to the maximum lag. Defaults to False.
+            range_min (float, optional): A minimum bound on the range. Defaults to 0.0.
+            local_exclusion (float, optional): Ignore semivariances within this distance for structural calculations. Defaults to 0.0.
+        """
         assert isinstance(max_distance, (float, int)), "max_distance should be a number"
         assert max_distance > 0, "max_distance should be positive"
         assert isinstance(num_bins, int), "num_bins should be an integer"
@@ -165,6 +179,14 @@ class SimpleVariogram:
         return params
 
     def fit(self, data: dd.DataFrame, value_col: str, x_col: str, y_col: str) -> None:
+        """Fit the semivariogram.
+
+        Args:
+            data (dd.DataFrame): The data to analyse.
+            value_col (str): The column name of the feature to analyse.
+            x_col (str): The column name of the x-coordinate of the cell.
+            y_col (str): The column name of the y-coordinate of the cell.
+        """
         assert isinstance(data, dd.DataFrame), "data should be a dask dataframe"
         column_names = data.columns
         assert isinstance(value_col, str), "value_col should be a string"
@@ -260,6 +282,16 @@ class SimpleVariogram:
         range_min: Optional[float] = None,
         local_exclusion: Optional[float] = None,
     ) -> None:
+        """Refit the structural model of the semivariogram.
+
+        Args:
+            model (Optional[str], optional): Name to the model to fit to the variogram. One of empirical, spherical, exponential or gaussian. Defaults to None.
+            use_nugget (bool, optional): Whether to allow a non-zero nugget effect. Defaults to False.
+            count_cut_off (int, optional): The threshold of counts to include a bin in structural calculations. Defaults to 0.
+            restrict_range (bool, optional): Whether to restrict the range to the maximum lag. Defaults to False.
+            range_min (float, optional): A minimum bound on the range. Defaults to 0.0.
+            local_exclusion (float, optional): Ignore semivariances within this distance for structural calculations. Defaults to 0.0.
+        """
         assert self.fitted, "Variogram must be fitted first buy calling .fit() method."
         if model is not None:
             assert isinstance(model, str), "model should be a string"
@@ -299,6 +331,16 @@ class SimpleVariogram:
         title: Optional[str] = None,
         include_y_zero: bool = True,
     ):
+        """Plot the semivariogram.
+
+        Args:
+            empirical_params (dict, optional): Plotting arguments of the empirical variogram. Defaults to {}.
+            structure_params (dict, optional): Plotting arguments of the structural variogram. Defaults to {}.
+            x_title (str, optional): Title of the x-axis. Defaults to "Lag Distances".
+            y_title (str, optional): Title of the y-axis. Defaults to "Semivariance".
+            title (Optional[str], optional): Title of the plot. Defaults to None.
+            include_y_zero (bool, optional): Include 0 in the y-axis. Defaults to True.
+        """
         assert self.fitted, "Variogram must be fitted first buy calling .fit() method."
         assert isinstance(empirical_params, dict), "empirical_params should be a dictionary"
         assert isinstance(structure_params, dict), "structure_params should be a dictionary"
