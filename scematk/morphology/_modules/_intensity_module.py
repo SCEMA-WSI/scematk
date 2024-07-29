@@ -173,29 +173,31 @@ class IntensityModule(_ABCModule):
         rename_dict = {"label": "Meta_Global_Mask_Label"}
         for i, channel_name in enumerate(channel_names):
             rename_dict[f"intensity_max-{i}"] = f"Intensity_{mask_name}_{channel_name}_MaxIntensity"
-            rename_dict[
-                f"intensity_mean-{i}"
-            ] = f"Intensity_{mask_name}_{channel_name}_MeanIntensity"
+            rename_dict[f"intensity_mean-{i}"] = (
+                f"Intensity_{mask_name}_{channel_name}_MeanIntensity"
+            )
             rename_dict[f"intensity_min-{i}"] = f"Intensity_{mask_name}_{channel_name}_MinIntensity"
-            rename_dict[f"intensity_stdd-{i}"] = f"Intensity_{mask_name}_{channel_name}_StdIntensity"
-            rename_dict[
-                f"intensity_median-{i}"
-            ] = f"Intensity_{mask_name}_{channel_name}_MedianIntensity"
-            rename_dict[
-                f"border_mean-{i}"
-            ] = f"Intensity_{mask_name}_{channel_name}_BorderMeanIntensity"
-            rename_dict[
-                f"border_min-{i}"
-            ] = f"Intensity_{mask_name}_{channel_name}_BorderMinIntensity"
-            rename_dict[
-                f"border_max-{i}"
-            ] = f"Intensity_{mask_name}_{channel_name}_BorderMaxIntensity"
-            rename_dict[
-                f"border_std-{i}"
-            ] = f"Intensity_{mask_name}_{channel_name}_BorderStdIntensity"
-            rename_dict[
-                f"border_median-{i}"
-            ] = f"Intensity_{mask_name}_{channel_name}_BorderMedianIntensity"
+            rename_dict[f"intensity_stdd-{i}"] = (
+                f"Intensity_{mask_name}_{channel_name}_StdIntensity"
+            )
+            rename_dict[f"intensity_median-{i}"] = (
+                f"Intensity_{mask_name}_{channel_name}_MedianIntensity"
+            )
+            rename_dict[f"border_mean-{i}"] = (
+                f"Intensity_{mask_name}_{channel_name}_BorderMeanIntensity"
+            )
+            rename_dict[f"border_min-{i}"] = (
+                f"Intensity_{mask_name}_{channel_name}_BorderMinIntensity"
+            )
+            rename_dict[f"border_max-{i}"] = (
+                f"Intensity_{mask_name}_{channel_name}_BorderMaxIntensity"
+            )
+            rename_dict[f"border_std-{i}"] = (
+                f"Intensity_{mask_name}_{channel_name}_BorderStdIntensity"
+            )
+            rename_dict[f"border_median-{i}"] = (
+                f"Intensity_{mask_name}_{channel_name}_BorderMedianIntensity"
+            )
         data.rename(columns=rename_dict, inplace=True)
         return data
 

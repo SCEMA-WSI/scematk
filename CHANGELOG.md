@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Added Reinhard stain normaliser
 Added morphological feature overlay
 Updated internal naming of standard deviation of intensity metric
+Added simple variogram module
 
 ## [v0.0.3](https://github.com/SCEMA-WSI/scematk/releases/tag/v0.0.3) - 2024-06-24
 
