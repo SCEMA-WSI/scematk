@@ -11,6 +11,7 @@ Added Reinhard stain normaliser
 Added morphological feature overlay
 Updated internal naming of standard deviation of intensity metric
 Added simple variogram module
+Added global and local Moran's I calculations
 
 ## [v0.0.3](https://github.com/SCEMA-WSI/scematk/releases/tag/v0.0.3) - 2024-06-24
 
