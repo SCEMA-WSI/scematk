@@ -1,11 +1,7 @@
 import dask.array as da
 import dask.dataframe as dd
-from math import sqrt
-import numpy as np
-from scipy.stats import norm
-from typing import Tuple
 
-class GlobalMoransI():
+class LocalMoransI():
     def __init__(
         self,
         distance_threshold: float = None,
