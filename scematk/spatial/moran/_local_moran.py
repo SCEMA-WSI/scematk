@@ -55,7 +55,6 @@ class LocalMoran():
             total = W.sum()
             total = total if total > 0 else 1
             W = W / total
-        s_0 = W.sum()
         y = data[value_col].to_dask_array(lengths=True)
         y = y.rechunk(self.chunk_size)
         z = y - y.mean()
