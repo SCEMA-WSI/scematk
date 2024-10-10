@@ -7,7 +7,7 @@ class GlobalMoran():
         self,
         distance_threshold: float,
         normalisation: str = "row",
-        chunk_size: int = 1000,
+        chunk_size: int = 4096,
         prune: float = 1.0
     ) -> None:
         if isinstance(distance_threshold, int): distance_threshold = float(distance_threshold)
