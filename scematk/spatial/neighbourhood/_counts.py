@@ -27,6 +27,7 @@ def neighbourhood_count(
     x_diff = coords[:, None, 0] - coords[None, :, 0]
     y_diff = coords[:, None, 1] - coords[None, :, 1]
     dist_mat = da.less_equal(da.sqrt(x_diff ** 2 + y_diff ** 2), distance_threshold).astype(int)
+    dist_mat[da.eye(dist_mat.shape[0], dtype=bool)] = 0
     counts = dist_mat.sum(axis=1).to_dask_dataframe().repartition(npartitions=data.npartitions)
     df = data[[label_col]]
     df[f'SpatialNeighbourCounts'] = counts.values
