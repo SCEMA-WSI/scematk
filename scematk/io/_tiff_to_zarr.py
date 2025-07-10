@@ -36,7 +36,7 @@ def tiff_to_zarr(
             out_shape,
             dtype="uint8",
             chunks=(chunk_size, chunk_size, 3),
-            store=zarr.DirectoryStore(zarr_path),
+            store=zarr.LocalStore(zarr_path),
         )
         y_mins = range(0, out_shape[0], tile_size)
         x_mins = range(0, out_shape[1], tile_size)
