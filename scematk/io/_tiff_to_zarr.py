@@ -2,6 +2,7 @@ import json
 import os
 from itertools import product
 
+import zarr
 from zarr.storage import LocalStore
 from openslide import OpenSlide
 from tqdm import tqdm
