@@ -5,6 +5,14 @@ from ._annotate import Annotation
 
 
 class Circle(Annotation):
+    """Create a Circle Annotation
+
+    Args:
+        y_center (int): y coordinate of the center of the circle
+        x_center (int): x coordinate of the center of the circle
+        radius (int): Radius of the circle
+        colour (str): Colour of the circle
+    """
     def __init__(self, y_center: int, x_center: int, radius: int, colour: str = "red") -> None:
         assert isinstance(y_center, int), "y_center must be an integer"
         assert isinstance(x_center, int), "x_center must be an integer"

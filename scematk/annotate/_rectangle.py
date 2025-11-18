@@ -4,6 +4,15 @@ from ._annotate import Annotation
 
 
 class Rectangle(Annotation):
+    """Create a rectangle annotation
+
+    Args:
+        y_start (int): y coordinate of the top left hand corner of the rectangle
+        x_start (int): x coordinate of the top left hand corner of the rectangle
+        y_length (int): Length of the rectangle in the y direction
+        x_length (int): Length of the rectangle in the y direction
+        colour (str): Colour of the rectangle
+    """
     def __init__(
         self, y_start: int, x_start: int, y_length: int, x_length: int, colour: str = "red"
     ) -> None:
