@@ -42,7 +42,6 @@ autosummary_generate = True  # IMPORTANT: makes autosummary build pages automati
 autodoc_default_options = {
     "members": True,
     "undoc-members": True,
+    'inherited-members': True,
     "show-inheritance": True,
 }
-
-html_theme = "sphinx_rtd_theme"
