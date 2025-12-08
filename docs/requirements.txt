@@ -1,3 +1,2 @@
--e .
-sphinx
-sphinx_rtd_theme
+Sphinx>=7.2,<7.4
+sphinx-rtd-theme>=1.2,<2.0
