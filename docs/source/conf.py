@@ -5,8 +5,7 @@
 
 import os
 import sys
-# Add project root to sys.path so autodoc can import the package without installing it
-sys.path.insert(0, os.path.abspath('../..'))
+sys.path.insert(0, os.path.abspath('../../scematk'))
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
@@ -29,7 +28,7 @@ exclude_patterns = []
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'sphinx_rtd_theme'
+html_theme = 'alabaster'
 html_static_path = ['_static']
 
 extensions = [
@@ -46,23 +45,3 @@ autodoc_default_options = {
     'inherited-members': True,
     "show-inheritance": True,
 }
-
-# Avoid importing heavy/optional dependencies on Read the Docs
-autodoc_mock_imports = [
-    "csbdeep",
-    "dask",
-    "dask_image",
-    "dask_jobqueue",
-    "matplotlib",
-    "matplotlib_scalebar",
-    "numpy",
-    "openslide",
-    "requests",
-    "skimage",
-    "scipy",
-    "shapely",
-    "stardist",
-    "tensorflow",
-    "tqdm",
-    "zarr",
-]
